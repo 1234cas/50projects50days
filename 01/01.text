@@ -3,6 +3,7 @@
    滚动条取消 overflow-y: hidden; overflow:hidden也可以
    height: 100vh; weight:100vw;
    唯一没做好的就是字 没做到淡入的效果 他用的opacity
+   他设置了background-position: center; 小图片的时候会显示中间 变大的时候会向两边摊开 
    重点：
    利用.pic.active和.pic.active span进行css属性设置 当active类被移除 .pic.active span就自然失效 一举两得
    我们就不用再获取span进行显示隐藏操作 只通过一个类的添加删除完成一个模块的变化
