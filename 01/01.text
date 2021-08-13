@@ -1,0 +1,8 @@
+   不用绝对定位不好搞盒子的垂直居中
+   子元素top：50%不生效是因为父元素没有设置高度 letf：50%生效是因为块默认100%宽
+   滚动条取消 overflow-y: hidden; overflow:hidden也可以
+   height: 100vh; weight:100vw;
+   唯一没做好的就是字 没做到淡入的效果 他用的opacity
+   重点：
+   利用.pic.active和.pic.active span进行css属性设置 当active类被移除 .pic.active span就自然失效 一举两得
+   我们就不用再获取span进行显示隐藏操作 只通过一个类的添加删除完成一个模块的变化

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            width: 90vw;
+            height: 90vh;
+        }
+
+        .pic {
+            position: relative;
+            flex: 1;
+            margin: 10px;
+            border-radius: 50px;
+            transition: all 1.5s;
+            overflow: hidden;
+
+        }
+
+        .pic.active {
+            flex: 10;
+        }
+
+        img {
+            width: 752px;
+            height: 534px;
+        }
+
+        .pic span {
+            display: block;
+            font-size: 24px;
+            position: absolute;
+            bottom: 60px;
+            left: 50px;
+            opacity: 0;
+            color: #fff;
+        }
+
+        .pic.active span {
+            opacity: 1;
+            transition: opacity 0.3s ease-in 0.4s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class=container>
+        <div class="pic active">
+            <img src="https://i0.hdslb.com/bfs/album/fb9ca1587284ea8877a6d2cea47558f715cdc519.png@2000w_1e.webp" alt="">
+            <span class="afterspan">小太阳</span>
+        </div>
+        <div class="pic">
+            <img src="https://i0.hdslb.com/bfs/album/8d9d7eb49a61cc9f1edde9a08d944ac0b45d98f7.png@2000w_1e.webp" alt="">
+            <span>钥匙孔</span>
+        </div>
+        <div class="pic">
+            <img src="https://i0.hdslb.com/bfs/article/d13383b449e4ed8aba7621ff4d678aea80b1afb1.jpg@942w_582h_progressive.webp"
+                alt="">
+            <span>艾蕾</span>
+        </div>
+        <div class="pic">
+            <img src="https://i0.hdslb.com/bfs/article/31ce2b6cb7270d95fcb61266a3a37e1ca69f42e3.jpg@942w_582h_progressive.webp"
+                alt="">
+            <span>北斋</span>
+        </div>
+        <div class="pic">
+            <img src="https://i0.hdslb.com/bfs/article/96c527a7d2ddcef43f90c01f43f65a1097eb0db0.jpg@942w_582h_progressive.webp"
+                alt="">
+            <span>弓凛</span>
+        </div>
+    </div>
+</body>
+<script>
+    const pics = document.querySelectorAll('.pic');
+    for (let i = 0; i < pics.length; i++) {
+        pics[i].addEventListener('click', function () {
+            for (let i = 0; i < pics.length; i++) {
+                pics[i].classList.remove('active');
+            }
+            this.classList.add('active');
+        })
+    }
+</script>
+<!-- <script>
+    const panels = document.querySelectorAll('.pic')
+
+    panels.forEach(panel => {
+        panel.addEventListener('click', () => {
+            removeActiveClasses()
+            panel.classList.add('active')
+        })
+    })
+
+    function removeActiveClasses() {
+        panels.forEach(panel => {
+            panel.classList.remove('active')
+        })
+    }
+</script> -->
+
+</html>
