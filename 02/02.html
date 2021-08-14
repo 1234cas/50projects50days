@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+
+        section {
+            width: 500px;
+            height: 60%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: auto;
+
+        }
+
+        .circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 4px solid #e0e0e0;
+            transition: border 1s;
+            vertical-align: middle;
+            text-align: center;
+            line-height: 30px;
+        }
+
+        .way {
+            height: 0;
+            width: 20%;
+            border: 2px solid #e0e0e0;
+            transition: border 1s;
+        }
+
+        button {
+            width: 60px;
+            height: 30px;
+            border-radius: 10px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .active {
+            border: 2px solid #3498db;
+            transition: border 1s;
+        }
+
+        button:disabled {
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div class="circle active">1</div>
+        <div class="way"></div>
+        <div class="circle">2</div>
+        <div class="way"></div>
+        <div class="circle">3</div>
+        <div class="way"></div>
+        <div class="circle">4</div>
+        <button class="prev">prev</button>
+        <button class="next">next</button>
+    </section>
+
+
+    <script>
+        const prev = document.querySelector('.prev');
+        const next = document.querySelector('.next');
+        const circles = document.querySelectorAll('.circle');
+        const ways = document.querySelectorAll('.way');
+
+        let index = 0;
+        prev.disabled = true;
+
+        prev.addEventListener('click', function () {
+            circles[index].classList.remove('active');
+            index--;
+            ways[index].classList.remove('active');
+            btn();
+            // update();
+        });
+
+        next.addEventListener('click', function () {
+            ways[index].classList.add('active');
+            index++
+            btn();
+            circles[index].classList.add('active');
+            // update();
+        })
+
+        // function update() {
+        //     circles.forEach((circle, idx) => {
+        //         if (idx <= index) {
+        //             circle.classList.add('active')
+        //         } else {
+        //             circle.classList.remove('active')
+        //         }
+        //     })
+        //     ways.forEach((way, idx) => {
+        //         if (idx < index) {
+        //             way.classList.add('active');
+
+        //         } else {
+        //             way.classList.remove('active');
+        //         }
+        //     })
+        // }
+
+        function btn() {
+            if (index <= 0) {
+                prev.disabled = true;
+            } else if (index >= circles.length - 1) {
+                next.disabled = true;
+            } else {
+                prev.disabled = false;
+                next.disabled = false;
+            }
+        }
+    </script>
+
+</body>
+
+</html>
