@@ -1,0 +1,11 @@
+他的做法 给body设背景颜色 当主体旋转时 body露出的同时文字从右侧滑入 一起出现 和谐美
+但是他这个往下滑就不好看了
+我的做法 左边利用边框直接整一个三角形 左上角是一个圆 把字体图标定位到4个角
+重点：
+nav ul li + li或者li:nth-child()
+transform-origin: 0 0;
+transform: rotate(19deg);
+三角形做法 width:0; height:0; boder-color:transparent transparent red transparent;
+boder-style:solid; boder-width:22px 8px 0 0; 
+this.getAttribute('class') ? this.classList.remove('active') : this.classList.add('active');
+text-transform: uppercase;变大写
