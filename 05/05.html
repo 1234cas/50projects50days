@@ -36,20 +36,20 @@
     <div></div>
     <span></span>
     <script>
-        // const div = document.querySelector('div');
-        // const span = document.querySelector('span');
+        const div = document.querySelector('div');
+        const span = document.querySelector('span');
 
-        // let i = 100;
+        let i = 100;
 
-        // const time1 = setInterval(function () {
-        //     i--;
-        //     div.style.filter = 'blur(' + i + 'px)';
-        //     span.innerHTML = (100 - i) + '%';
-        //     span.style.opacity = i + '%';
-        //     if (i === 0) {
-        //         window.clearInterval(time1);
-        //     }
-        // }, 20);
+        const time1 = setInterval(function () {
+            i--;
+            div.style.filter = 'blur(' + i + 'px)';
+            span.innerHTML = (100 - i) + '%';
+            span.style.opacity = i + '%';
+            if (i === 0) {
+                window.clearInterval(time1);
+            }
+        }, 20);
     </script>
 </body>
 
