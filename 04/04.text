@@ -1,0 +1,8 @@
+重点：
+在div中input和button中有一个小间隔 这个间隔不知道是啥
+但是他可以被我选中 于是就被我用font-size:0解决
+然后上下不对齐用 vertical-align:bottom解决
+input.classList.toggle('active'); 这个写法直接把我前面的三元表达式秒杀
+autofocus placeholder这些属性属于html属性 只能写在行内
+justify-content: center; 利用flex居中元素再让他们收缩 就会从两边收缩
+outline: none;

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            background: url(https://i0.hdslb.com/bfs/album/6414afdb5720c718762b5b9033afe3be773b5c8c.png);
+            height: 100vh;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .search {
+            background-color: black;
+            font-size: 0;
+        }
+
+        input {
+            height: 50px;
+            width: 180px;
+            border: 0px solid;
+            outline: none;
+            transition: all .7s;
+            background-color: transparent;
+            padding: 0px 10px;
+            color: white;
+        }
+
+        button {
+            height: 50px;
+            width: 50px;
+            border: none;
+            background-color: black;
+            vertical-align: bottom;
+            color: white;
+        }
+
+        .active {
+            width: 0px;
+            padding: 0px;
+            transition: all .4s;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="search">
+        <input type="text" value="" autofocus placeholder="search...">
+        <button>搜索</button>
+    </section>
+    <script>
+        const input = document.querySelector('input');
+        const button = document.querySelector('button');
+
+
+        button.addEventListener('click', () => {
+            //input.getAttribute('class') ? input.classList.remove('active') : input.classList.add('active');
+            input.classList.toggle('active');
+            input.focus();
+        })
+    </script>
+</body>
+
+</html>
