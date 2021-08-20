@@ -1,0 +1,16 @@
+这个效果我不会做
+
+focus和blur事件
+label的for属性写要绑定的input
+input:valid
+.box input:focus+label span,
+.box input:valid+label span {
+    color: lightblue;
+    transform: translateY(-30px);
+   }
+这个写法对结构顺序有要求 label必须是在input:focus下面 如果label元素在input的上方则无法生效
+pointer-events: none;
+可以阻止用户的点击动作产生任何效果
+阻止缺省鼠标指针的显示
+阻止CSS里的hover和active状态的变化触发事件
+阻止JavaScript点击动作触发的事件

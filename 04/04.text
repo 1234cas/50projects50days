@@ -6,3 +6,4 @@ input.classList.toggle('active'); 这个写法直接把我前面的三元表达�
 autofocus placeholder这些属性属于html属性 只能写在行内
 justify-content: center; 利用flex居中元素再让他们收缩 就会从两边收缩
 outline: none;
+classList.add/remove/toggle/contains
