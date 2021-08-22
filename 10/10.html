@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            /* background: url(https://api.vvhan.com/api/acgimg) no-repeat center/cover; */
+            /* color: white; */
+            overflow: hidden;
+        }
+
+        section {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        button {
+            width: 150px;
+            height: 50px;
+        }
+
+        img {
+            width: 1600px;
+            height: 1000px;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <button class="btn1">中文笑话</button>
+        <button class="btn2">英文笑话</button>
+        <button class="btn3">图片</button>
+    </section>
+    <h3 class="cn"></h3>
+    <h3 class="eng"></h3>
+    <div><img src="https://api.vvhan.com/api/acgimg" alt=""></div>
+
+    <script src="./ajax.js"></script>
+    <script>
+        //中文笑话
+        const joke = document.querySelector('.cn');
+        const btn1 = document.querySelector('.btn1');
+
+        btn1.addEventListener('click', generateJoke1);
+
+        generateJoke1();
+
+        function generateJoke1() {
+            ajax({
+                type: 'get',
+                url: 'https://api.vvhan.com/api/xh',
+                header: {
+                    'Content-Type': 'application/json'
+                },
+                success: function (response) {
+                    joke.innerHTML = response;
+                }
+            })
+        }
+
+        //英文笑话
+        const btn2 = document.querySelector('.btn2');
+        const jokeEl = document.querySelector('.eng');
+
+        btn2.addEventListener('click', generateJoke2)
+
+        generateJoke2()
+
+        async function generateJoke2() {
+            const config = {
+                headers: {
+                    Accept: 'application/json',
+                },
+            }
+
+            const res = await fetch('https://icanhazdadjoke.com', config)
+
+            const data = await res.json()
+
+            jokeEl.innerHTML = data.joke
+        }
+
+        //图片
+        const btn3 = document.querySelector('.btn3');
+        const body = document.body
+        const imgbox = document.querySelector('div');
+
+
+        btn3.addEventListener('click', function () {
+            let random = Math.floor(Math.random() * 600);
+            let img = document.createElement('img');
+            img.src = 'https://cdn.jsdelivr.net/gh/uxiaohan/GitImgTypecho/Acg/api.vvhan.com[' + random + '].jpg';
+            // if (imgbox.firstChild) imgbox.removeChild(imgbox.firstChild);
+            imgbox.removeChild(imgbox.firstChild);
+            imgbox.appendChild(img);
+            //切换不了body的背景
+            // body.style.background = 'https://cdn.jsdelivr.net/gh/uxiaohan/GitImgTypecho/Acg/api.vvhan.com[' + random + '].jpg ';
+        })
+    </script>
+</body>
+
+</html>
