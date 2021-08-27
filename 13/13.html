@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            background: linear-gradient(to right, rgba(2, 242, 250, 0.171), rgba(255, 0, 106, 0.171)), url(https://img.kurocore.com/pi/066/016/66016573_0.jpg) no-repeat center/cover;
+            overflow: hidden;
+        }
+
+        textarea {
+
+            display: block;
+            height: 150px;
+            width: 600px;
+            margin: auto;
+            background-color: rgba(255, 235, 205, 0.171);
+            resize: none;
+            border-radius: 10px;
+            font: 18px 'Muli', sans-serif;
+            padding: 5px;
+        }
+
+        section {
+            width: 600px;
+            display: flex;
+            margin: 10px auto;
+            flex-wrap: wrap;
+        }
+
+        div {
+            height: 40px;
+            line-height: 40px;
+            font-family: 'Muli', sans-serif;
+            background-color: rgba(130, 238, 233, 0.274);
+            border-radius: 10px;
+            border: 1px solid rgba(235, 135, 202, 0.329);
+            margin: 5px;
+            padding: 5px;
+        }
+
+        .active {
+            background-color: rgba(255, 136, 0, 0.349);
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+        <textarea name="" id="" cols="50" rows="10"></textarea>
+        <section></section>
+    </main>
+
+    <script>
+        const section = document.querySelector('section')
+        const textarea = document.querySelector('textarea')
+
+        textarea.focus()
+
+        textarea.addEventListener('keyup', (e) => {
+            createTags(e.target.value)
+
+            if (e.key === 'Enter') {
+                setTimeout(() => {
+                    e.target.value = ''
+                }, 10)
+
+                randomSelect()
+            }
+        })
+
+        function createTags(input) {
+            const tags = input.split(',').filter(tag => tag.trim() !== '').map(tag => tag.trim())
+
+            section.innerHTML = ''
+
+            tags.forEach(tag => {
+                const div = document.createElement('div')
+                div.classList.add('tag')
+                div.innerText = tag
+                section.appendChild(div)
+            })
+        }
+
+        function randomSelect() {
+            const times = 30
+
+            const interval = setInterval(() => {
+                const randomTag = pickRandomTag()
+
+                if (randomTag !== undefined) {
+                    highlightTag(randomTag)
+
+                    setTimeout(() => {
+                        unHighlightTag(randomTag)
+                    }, 100)
+                }
+            }, 100);
+
+            setTimeout(() => {
+                clearInterval(interval)
+
+                setTimeout(() => {
+                    const randomTag = pickRandomTag()
+
+                    highlightTag(randomTag)
+                }, 100)
+
+            }, times * 100)
+        }
+
+        function pickRandomTag() {
+            const tags = document.querySelectorAll('.tag')
+            return tags[Math.floor(Math.random() * tags.length)]
+        }
+
+        function highlightTag(tag) {
+            tag.classList.add('active')
+        }
+
+        function unHighlightTag(tag) {
+            tag.classList.remove('active')
+        }
+    </script>
+    <!-- 自己写的 -->
+    <!-- <script>
+        const text = document.querySelector('textarea');
+        const section = document.querySelector('section');
+        const divs = document.querySelectorAll('div');
+
+        let va
+
+        text.addEventListener('input', function () {
+            const divs = document.querySelectorAll('div');
+            va = this.value.split(',');
+            if (va.length > divs.length) {
+                var div = document.createElement('div');
+                section.appendChild(div);
+            }
+
+            divs.forEach((div, index) => {
+                div.innerHTML = va[index];
+                if (!div.innerHTML.trim() == '') {
+                    div.style.display = 'block';
+                } else {
+                    section.removeChild(div);
+                }
+            })
+
+        })
+
+        text.addEventListener('keydown', function (e) {
+            const divs = document.querySelectorAll('div');
+            if (e.keyCode == 13) {
+                // text.value = '';
+                let divcolor = setInterval(function () {
+                    let random = Math.floor(Math.random() * va.length);
+                    divs[random].classList.add('active');
+                    //这里不能interval 因为如果不设暂停会叠加
+                    setTimeout(() => {
+                        divs[random].classList.remove('active');
+                    }, 100);
+
+                }, 100)
+
+                setTimeout(function () {
+                    clearInterval(divcolor);
+                    setTimeout(() => {
+                        let random = Math.floor(Math.random() * va.length);
+                        divs[random].classList.add('active');
+                    }, 100)
+
+                }, 3000)
+            }
+        })
+
+    </script> -->
+</body>
+
+</html>
