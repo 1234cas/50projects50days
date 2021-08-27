@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            color: black;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            background: url(https://img.kurocore.com/pi/037/311/37311279_0.jpg) no-repeat center/cover;
+        }
+
+        .container {
+            width: 100px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            margin: 40px;
+        }
+
+        p {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <svg id="i-star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none"
+            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <path d="M16 2 L20 12 30 12 22 19 25 30 16 23 7 30 10 19 2 12 12 12 Z" />
+        </svg>
+        <div class="num"></div>
+        <p>收藏</p>
+    </div>
+    <div class="container">
+        <svg id="i-heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none"
+            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <path
+                d="M4 16 C1 12 2 6 7 4 12 2 15 6 16 8 17 6 21 2 26 4 31 6 31 12 28 16 25 20 16 28 16 28 16 28 7 20 4 16 Z" />
+        </svg>
+        <div class="num"></div>
+        <p>爱心</p>
+    </div>
+    <div class="container">
+        <svg id="i-msg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none"
+            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <path d="M2 4 L30 4 30 22 16 22 8 29 8 22 2 22 Z" />
+        </svg>
+        <div class="num"></div>
+        <p>评论</p>
+    </div>
+    <div class="container">
+        <svg id="i-eye" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none"
+            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <circle cx="17" cy="15" r="1" />
+            <circle cx="16" cy="16" r="6" />
+            <path d="M2 16 C2 16 7 6 16 6 25 6 30 16 30 16 30 16 25 26 16 26 7 26 2 16 2 16 Z" />
+        </svg>
+        <div class="num"></div>
+        <p>观看</p>
+    </div>
+    <script>
+        const nums = document.querySelectorAll('.num');
+
+        function increase(element, goal) {
+            element.innerHTML = 0;
+            const add = setInterval(() => {
+                let num = parseFloat(element.innerHTML);
+                num += goal / 100;
+                element.innerHTML = num;
+            }, 20)
+            setTimeout(() => {
+                clearInterval(add);
+            }, 2000)
+        }
+        increase(nums[0], 12000);
+        increase(nums[1], 5000);
+        increase(nums[2], 7500);
+        increase(nums[3], 7500);
+    </script>
+</body>
+
+</html>
