@@ -4,6 +4,7 @@
 然后上下不对齐用 vertical-align:bottom解决
 input.classList.toggle('active'); 这个写法直接把我前面的三元表达式秒杀
 autofocus placeholder这些属性属于html属性 只能写在行内
+可以用input.placeholder=''直接修改 因为js对属性的操作的会变成行内样式
 justify-content: center; 利用flex居中元素再让他们收缩 就会从两边收缩
 outline: none;
-classList.add/remove/toggle/contains
+classList.add/remove/toggle/contains() 都是方法
