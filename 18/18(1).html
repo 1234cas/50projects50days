@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url(https://img.kurocore.com/pi/066/337/66337051_0.jpg) no-repeat center/cover;
+            transition: all .3s;
+        }
+
+        section {
+
+            position: relative;
+
+        }
+
+        #img-box {
+            width: 70vw;
+            height: 70vh;
+            display: none;
+            transition: all .3s;
+            overflow: hidden;
+        }
+
+        img {
+            width: 100vw;
+            height: 100vh;
+            object-fit: none;
+            object-position: 10% 10%;
+            background-position: center;
+        }
+
+        #img-box.active {
+            display: block;
+            transition: all .3s;
+        }
+
+        .left,
+        .right {
+            width: 100px;
+            height: 100px;
+            background-color: black;
+            position: absolute;
+            top: 45%;
+        }
+
+        .left {
+            left: -10%;
+
+        }
+
+        .right {
+            right: -10%;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div id="img-box" class="active"> <img src="https://img.kurocore.com/pi/066/337/66337051_0.jpg" alt=""></div>
+        <div id="img-box"> <img src="https://img.kurocore.com/pi/060/922/60922957_0.jpg" alt=""></div>
+        <div id="img-box"> <img src="https://img.kurocore.com/pi/080/228/80228475_0.jpg" alt=""></div>
+        <button class="left"></button>
+        <button class="right"></button>
+    </section>
+
+    <script>
+        const left = document.querySelector('.left');
+        const right = document.querySelector('.right');
+        const imgs = document.querySelectorAll('#img-box img')
+
+        let index = 0
+
+        left.addEventListener('click', function () {
+            removeactive();
+            index--;
+            if (index < 0) {
+                index = imgs.length - 1;
+            }
+            addactive();
+            bg();
+        })
+
+        right.addEventListener('click', function () {
+            removeactive();
+            index++;
+            if (index >= imgs.length) {
+                index = 0;
+            }
+            addactive();
+            bg();
+        })
+
+        function removeactive() {
+            imgs[index].parentElement.classList.remove('active');
+        }
+        function addactive() {
+            imgs[index].parentElement.classList.add('active');
+        }
+        function bg() {
+            document.body.style.background = 'url(' + imgs[index].src + ') no-repeat center/cover';
+        }
+    </script>
+</body>
+
+</html>
