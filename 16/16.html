@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* *比继承的属性优先级高 继承是最低的 */
+        * {
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+
+        body {
+            width: 100vw;
+            height: 80vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-around;
+            flex-direction: column;
+            align-items: center;
+            background-color: #3494e4;
+        }
+
+        main {
+            height: 350px;
+            width: 150px;
+            border: 4px solid #144fc6;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            overflow: hidden;
+            color: #6ab3f8;
+        }
+
+        .white {
+            height: 100%;
+            background-color: white;
+            transition: all .3s;
+            text-align: center;
+            color: inherit;
+            line-height: 350px;
+        }
+
+        .blue {
+            height: 0;
+            background-color: #6ab3f8;
+            text-align: center;
+            line-height: 0;
+            color: #144fc6;
+            font-size: 30px;
+            transition: all .3s;
+        }
+
+        section {
+            height: 200px;
+            width: 300px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        button {
+            height: 100px;
+            width: 50px;
+            margin: 10px;
+            border: 4px solid #144fc6;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            color: #3494e4;
+            transition: all .5s;
+        }
+
+        .active {
+            transition: all .5s;
+            background-color: #6ab3f8;
+            color: white
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <head>
+        <h1>Drink Water</h1>
+        <p>Goal: 2 Liters</p>
+    </head>
+    <main>
+        <div class="white">
+            2L
+            Remained
+        </div>
+        <div class="blue"></div>
+    </main>
+    <p>Select how many glasses of water that you have drank</p>
+    <section>
+        <button>250ml</button>
+        <button>250ml</button>
+        <button>250ml</button>
+        <button>250ml</button>
+        <button>250ml</button>
+        <button>250ml</button>
+        <button>250ml</button>
+        <button>250ml</button>
+    </section>
+
+    <script>
+        //我写的有点拉
+        const btns = document.querySelectorAll('button');
+        const white = document.querySelector('.white');
+        const blue = document.querySelector('.blue');
+
+        btns.forEach((btn, index) => {
+            btn.addEventListener('click', function () {
+                //不直接在变量定义的时候加%是因为加了之后转不了number 不知道为什么
+                //白色的占比
+                let whiteheight = (7 - index) / 8;
+                //白色的高
+                white.style.height = whiteheight * 100 + '%';
+                //白色里面的字
+                white.innerHTML = 2 - (index + 1) / 4 + 'L Remained';
+                //line-height要改成lineHeight 不是line_height
+                //白色的行高 让字居中
+                white.style.lineHeight = 350 * whiteheight + 'px';
+                //蓝色的高
+                blue.style.height = (1 - whiteheight) * 100 + '%';
+                //蓝色里面的字
+                blue.innerHTML = (1 - whiteheight) * 100 + '%';
+                //蓝色的行高 让字居中
+                blue.style.lineHeight = 350 * (1 - whiteheight) + 'px';
+
+                for (let i = 0; i < btns.length; i++) {
+                    btns[i].classList.remove('active');
+                }
+                for (let i = 0; i <= index; i++) {
+                    btns[i].classList.toggle('active');
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
