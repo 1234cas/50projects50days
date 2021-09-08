@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: url(https://img.kurocore.com/pi/059/322/59322814_0.jpg);
+        }
+
+        .triangle1,
+        .triangle2 {
+            position: absolute;
+            border: 80px solid transparent;
+            width: 0;
+            height: 0;
+            top: 40%;
+        }
+
+        .triangle1 {
+            border-bottom: 80px solid rgba(255, 255, 255, 0.829);
+            animation: rotate1 2.5s infinite;
+        }
+
+        .triangle2 {
+            border-right: 80px solid rgba(121, 99, 99, 0.911);
+            animation: rotate2 2.5s infinite;
+        }
+
+        @keyframes rotate1 {
+
+            /* to {
+                transform: rotate(360deg);
+            } */
+
+            25% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+                transform: rotate(180deg);
+            }
+
+            75% {
+                transform: rotate(180deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes rotate2 {
+
+            /* to {
+                transform: rotate(360deg);
+            } */
+            25% {
+                transform: rotate(180deg);
+            }
+
+            50% {
+                transform: rotate(180deg);
+            }
+
+            75% {
+                transform: rotate(360deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+                /* transform: rotate(0); */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="triangle">
+        <div class="triangle1"></div>
+        <div class="triangle2"></div>
+    </section>
+</body>
+
+</html>
