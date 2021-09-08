@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-color: #ECF0F1;
+        }
+
+        article {
+            display: flex;
+            flex-direction: column;
+            width: 350px;
+            height: 450px;
+            background-color: rgba(0, 0, 0, 0.281);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.445);
+        }
+
+        .artimg {
+            width: 350px;
+            height: 200px;
+
+        }
+
+        .artimg img,
+        .artimg div {
+            width: 100%;
+            height: 100%;
+        }
+
+        .content {
+            flex: 1;
+            padding: 30px;
+            background-color: #FFFFFF;
+        }
+
+        .excerpt {
+            margin: 30px 0;
+        }
+
+        .author>div:nth-child(1) {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 0px transparent;
+        }
+
+        .author-info {
+            display: inline-block;
+            width: 100px;
+            vertical-align: top;
+        }
+
+        .animated-bg {
+            background-image: linear-gradient(to right,
+                    #f6f7f8 0%,
+                    #edeef1 10%,
+                    #f6f7f8 20%,
+                    #f6f7f8 100%);
+            background-size: 200% 100%;
+            animation: bgPos 1s linear infinite;
+        }
+
+        .animated-bg-text {
+            border-radius: 50px;
+            display: inline-block;
+            margin: 0;
+            height: 10px;
+            width: 100%;
+        }
+
+        @keyframes bgPos {
+            0% {
+                background-position: 50% 0;
+            }
+
+            100% {
+                background-position: -150% 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <article>
+        <section class="artimg animated-bg">
+            <div></div>
+        </section>
+        <section class="content ">
+            <h3 class="animated-bg animated-bg-text"></h3>
+            <div class="excerpt ">
+                <div class="animated-bg-text animated-bg"></div>
+                <div class="animated-bg-text animated-bg"></div>
+                <div class="animated-bg-text animated-bg"></div>
+            </div>
+            <div class="author">
+                <div class="animated-bg-text animated-bg"></div>
+                <div class="author-info">
+                    <div class="animated-bg-text animated-bg"></div>
+                    <div class="animated-bg-text animated-bg"></div>
+                </div>
+            </div>
+        </section>
+    </article>
+    <script>
+        const artimg = document.querySelector('.artimg');
+        const content = document.querySelector('.content');
+        const h3 = document.querySelector('h3');
+        const excerpt = document.querySelector('.excerpt');
+        const author = document.querySelector('.author');
+
+        const animated_bgs = document.querySelectorAll('.animated-bg')
+        const animated_bg_texts = document.querySelectorAll('.animated-bg-text')
+
+        function ww() {
+            artimg.innerHTML = '<img src="https://img.kurocore.com/pi/059/322/59322814_0.jpg" alt="">';
+            h3.innerHTML = '9月6日';
+            excerpt.innerHTML = '玩游戏，写代码';
+            author.innerHTML = '1234cas';
+
+            animated_bgs.forEach((bg) => bg.classList.remove('animated-bg'))
+            animated_bg_texts.forEach((bg) => bg.classList.remove('animated-bg-text'))
+        }
+
+
+        // setTimeout(ww, 2000)
+    </script>
+</body>
+
+</html>
