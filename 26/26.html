@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .left {
+            width: 30%;
+            height: 300%;
+            display: flex;
+            flex-direction: column-reverse;
+            transition: all 1s;
+            transform: translateY(-200vh);
+        }
+
+        .left>div {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 25px;
+        }
+
+        .box1 {
+            background-color: #313a82d8;
+        }
+
+        .box2 {
+            background-color: #864647c4;
+        }
+
+        .box3 {
+            background-color: #1b50c2d7;
+        }
+
+        .right {
+            width: 70%;
+            height: 300%;
+            transition: all 1s;
+        }
+
+        .right>div {
+            width: 100%;
+            height: 100vh;
+        }
+
+        .imgbox1 {
+            background: url(https://img.kurocore.com/pi/048/889/48889436_0.jpg) no-repeat center/cover;
+        }
+
+        .imgbox2 {
+            background: url(https://img.kurocore.com/pi/079/766/79766575_0.jpg) no-repeat center/cover;
+        }
+
+        .imgbox3 {
+            background: url(https://img.kurocore.com/pi/069/541/69541377_0.jpg) no-repeat center/cover;
+        }
+
+
+        button {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 0;
+            background-color: rgba(255, 255, 255, 0.637);
+        }
+
+        .next {
+            top: 55%;
+            left: 30%;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .pre {
+            top: 45%;
+            right: 70%;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="left">
+        <div class="box1">傍晚的城市</div>
+        <div class="box2"> 马猴烧酒</div>
+        <div class="box3">上学路上的jk </div>
+    </div>
+    <div class="right">
+        <div class="imgbox1"></div>
+        <div class="imgbox2"></div>
+        <div class="imgbox3"></div>
+    </div>
+    <button class="next">下</button>
+    <button class="pre">上</button>
+    <script>
+        const left = document.querySelector('.left');
+        const right = document.querySelector('.right');
+        const next = document.querySelector('.next');
+        const pre = document.querySelector('.pre');
+
+        let index = 0;
+        let imglength = right.childElementCount - 1;
+
+        next.addEventListener('click', function () {
+            index++;
+            if (index > imglength) index = 0;
+            left.style.transform = 'translateY(' + (2 - index) * -100 + 'vh)'
+            right.style.transform = 'translateY(' + index * -100 + 'vh)'
+        })
+        pre.addEventListener('click', function () {
+            index--;
+            if (index < 0) index = imglength;
+            left.style.transform = 'translateY(' + (2 - index) * -100 + 'vh)'
+            right.style.transform = 'translateY(' + index * -100 + 'vh)'
+        })
+    </script>
+    <!-- 原项目 -->
+    <script>
+        const sliderContainer = document.querySelector('.slider-container')
+        const slideRight = document.querySelector('.right-slide')
+        const slideLeft = document.querySelector('.left-slide')
+        const upButton = document.querySelector('.up-button')
+        const downButton = document.querySelector('.down-button')
+        const slidesLength = slideRight.querySelectorAll('div').length
+
+        let activeSlideIndex = 0
+
+        slideLeft.style.top = `-${(slidesLength - 1) * 100}vh`
+
+        upButton.addEventListener('click', () => changeSlide('up'))
+        downButton.addEventListener('click', () => changeSlide('down'))
+
+        const changeSlide = (direction) => {
+            const sliderHeight = sliderContainer.clientHeight
+            if (direction === 'up') {
+                activeSlideIndex++
+                if (activeSlideIndex > slidesLength - 1) {
+                    activeSlideIndex = 0
+                }
+            } else if (direction === 'down') {
+                activeSlideIndex--
+                if (activeSlideIndex < 0) {
+                    activeSlideIndex = slidesLength - 1
+                }
+            }
+
+            slideRight.style.transform = `translateY(-${activeSlideIndex * sliderHeight}px)`
+            slideLeft.style.transform = `translateY(${activeSlideIndex * sliderHeight}px)`
+        }
+    </script>
+
+</body>
+
+</html>
