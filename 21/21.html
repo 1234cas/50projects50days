@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url(https://img.kurocore.com/pi/047/213/47213538_0.jpg) no-repeat center/cover;
+
+        }
+
+        .box {
+            position: relative;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            border: 3px solid black;
+            background-color: #fff;
+            margin: 20px;
+        }
+
+        .end {
+            width: 100px;
+            height: 100px;
+            border: 5px solid white;
+        }
+
+        .hovered {
+            width: 100px;
+            height: 100px;
+            border: 3px dashed black;
+
+        }
+
+        .img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url(https://source.unsplash.com/random/150x150) no-repeat center/cover;
+            cursor: pointer;
+
+        }
+
+        @media (max-width:600px) {
+            body {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="img" draggable="true"></div>
+    </div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <script>
+        const img = document.querySelector('.img');
+        const boxs = document.querySelectorAll('.box');
+
+        img.addEventListener('dragstart', dragStart)
+        img.addEventListener('dragend', dragEnd)
+
+        boxs.forEach(box => {
+            box.addEventListener('dragover', dragOver)
+            box.addEventListener('dragenter', dragEnter)
+            box.addEventListener('dragleave', dragLeave)
+            box.addEventListener('drop', dragDrop)
+        })
+
+        function dragStart() {
+            this.classList.add('hold');
+            setTimeout(() => this.className = 'invisible', 0)
+        }
+
+        function dragEnd() {
+            this.className = 'img'
+        }
+
+        function dragOver(e) {
+            e.preventDefault()
+        }
+
+        function dragEnter(e) {
+            e.preventDefault()
+            this.className += ' hovered'
+        }
+
+        function dragLeave() {
+            this.className = 'box'
+        }
+
+        function dragDrop() {
+            this.className = 'box'
+            this.append(img)
+        }
+    </script>
+</body>
+
+</html>
