@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        body {
+            width: 99vw;
+            height: 100vh;
+            font-family: 'Open Sans', sans-serif;
+            line-height: 35px;
+        }
+
+        nav {
+            position: fixed;
+            width: 100%;
+            height: 70px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.719);
+            color: white;
+            transition: all .3s;
+            z-index: 3;
+        }
+
+        .afternav {
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.671);
+            color: black;
+            transition: all .3s;
+        }
+
+        nav ul li {
+            float: left;
+            padding: 0 15px;
+        }
+
+        .active {
+            color: skyblue
+        }
+
+        nav ul li:hover,
+        nav h1:hover {
+            color: skyblue;
+            cursor: pointer;
+        }
+
+
+        .imgbox {
+            position: relative;
+        }
+
+        img {
+            width: 100%;
+            height: 100vh;
+        }
+
+        .imgcontent {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            line-height: 40px;
+        }
+
+        main {
+            width: 1200px;
+            margin: auto;
+            padding: 60px;
+        }
+
+        article,
+        article h3 {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <h1>My Website</h1>
+        <ul>
+            <li class="active">Home</li>
+            <li>About</li>
+            <li>Services</li>
+            <li>Contact</li>
+        </ul>
+    </nav>
+    <div class="imgbox">
+        <img src="https://img.kurocore.com/pi/059/322/59322814_0.jpg" alt="">
+        <div class="imgcontent">
+            <h2>Welcome To My Website</h2>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores, consequuntur?</p>
+        </div>
+    </div>
+    <main>
+        <article>
+            <h3>Content One</h3>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione dolorem voluptates eveniet tempora ut
+                cupiditate
+                magnam, sapiente, hic quo in ipsum iste soluta eaque perferendis nihil recusandae dolore officia aperiam
+                corporis
+                similique. Facilis quos tempore labore totam! Consectetur molestiae iusto ducimus error reiciendis
+                aspernatur dolor,
+                modi dolorem sit architecto, voluptate magni sunt unde est quas? Voluptates a dolorum voluptatum quo
+                perferendis aut
+                sit. Aspernatur libero laboriosam ab eligendi omnis delectus earum labore, placeat officiis sint illum
+                rem
+                voluptas
+                ipsum repellendus iste eius recusandae quae excepturi facere, iure rerum sequi? Illum velit delectus
+                dicta
+                et iste
+                dolorum obcaecati minus odio eligendi!</p>
+        </article>
+        <article>
+            <h3>Content Two</h3>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur provident nostrum possimus inventore
+                nisi
+                laboriosam
+                consequatur modi nulla eos, commodi, omnis distinctio! Maxime distinctio impedit provident, voluptates
+                illo
+                odio nostrum
+                minima beatae similique a sint sapiente voluptatum atque optio illum est! Tenetur tempora doloremque
+                quae
+                iste aperiam
+                hic cumque repellat?</p>
+        </article>
+    </main>
+    <script>
+        const nav = document.querySelector('nav');
+
+        document.addEventListener('scroll', function () {
+            // nav.offsetHeight
+            if (window.pageYOffset > nav.offsetHeight) {
+                nav.classList.add('afternav');
+            } else {
+                nav.classList.remove('afternav');
+            }
+        })
+    </script>
+</body>
+
+</html>
