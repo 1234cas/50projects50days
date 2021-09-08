@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background-color: teal;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            width: 150px;
+            height: 70px;
+            border-radius: 30px;
+            font-size: 18px;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .box {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+
+        .box div {
+            /* 如果这里不设行内块直接用div的话 下面就不用加br 但是这样会导致所有消息宽度一样 */
+            float: right;
+            /* 加了浮动 行内块就失效了  */
+            /* display: inline-block; */
+            position: relative;
+            top: 0;
+            right: 0;
+            height: 50px;
+            line-height: 50px;
+            font-size: 20px;
+            margin: 10px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <button>随机消息</button>
+    <span class="box"></span>
+    <script>
+        const btn = document.querySelector('button');
+        const box = document.querySelector('.box');
+
+        const colorarr = ['#0800FF', '#B500FF', '#EE481A'];
+        const htmlarr = ['one', 'two', 'three', 'four'];
+
+        btn.addEventListener('click', function () {
+            let random = Math.floor(Math.random() * 4);
+            const div = document.createElement('div');
+            div.innerHTML = 'message' + '&nbsp' + htmlarr[random];
+            div.style.color = colorarr[random];
+            box.appendChild(div);
+            const br = document.createElement('br');
+            box.appendChild(br);
+
+            setTimeout(function () {
+                box.removeChild(div);
+                box.removeChild(br);
+            }, 3000)
+        })
+    </script>
+</body>
+
+</html>
