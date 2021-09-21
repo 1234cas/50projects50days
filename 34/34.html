@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 25px;
+        }
+
+        .timer {
+            display: flex;
+            width: 100px;
+            height: 100px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .timer ul {
+            position: relative;
+            width: 100px;
+            height: 40px;
+            overflow: hidden;
+        }
+
+        .timer ul li {
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            left: 40%;
+            transform: rotate(180deg);
+            transition: all 2s;
+            transform-origin: 100% 100%;
+            font-size: 30px;
+        }
+
+        .timer ul li.active {
+            /* transform: rotate(-180deg); */
+            animation: ww 2s;
+        }
+
+
+        @keyframes ww {
+            30% {
+                transform: rotate(-20deg);
+            }
+
+            40% {
+                transform: rotate(25deg);
+            }
+
+            50% {
+                transform: rotate(-10deg);
+            }
+
+            60% {
+                transform: rotate(15deg);
+            }
+
+            70% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(-180deg);
+            }
+        }
+
+        /* @keyframes ww {
+            45% {
+                transform: rotate(-20deg);
+            }
+
+            55% {
+                transform: rotate(20deg);
+            }
+
+            100% {
+                transform: rotate(-180deg);
+            }
+        } */
+        .replay {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="timer">
+        <ul>
+            <li>3</li>
+            <li>2</li>
+            <li>1</li>
+            <li>0</li>
+        </ul>
+        <div>goal</div>
+    </section>
+    <section class="replay">
+        <p>go</p>
+        <button>replay</button>
+    </section>
+    <script>
+        const startbtn = document.querySelector('div');
+        const lis = document.querySelectorAll('.timer ul li');
+        const replay = document.querySelector('.replay')
+
+        let i = 0;
+
+        function timer() {
+            let timer = setInterval(function () {
+                lis[i].classList.toggle('active');
+                i++;
+                console.log(i);
+                if (i > 3) {
+                    clearInterval(timer)
+                    i = 0;
+                    setTimeout(function () {
+                        lis.forEach(li => li.classList.toggle('active'));
+                        replay.previousElementSibling.style.display = 'none';
+                        replay.style.display = 'block';
+                    }, 2000)
+
+                }
+            }, 2000)
+        }
+        timer();
+        replay.addEventListener('click', function () {
+            replay.previousElementSibling.style.display = 'flex';
+            replay.style.display = 'none';
+            timer();
+        })
+    </script>
+    <!-- <script>
+        //意义不明的代码
+        const section = document.querySelector('section')
+        //这样写time是undefined 因为是调用又没传参 定时器无法传参
+        // let timer = setInterval(function () {
+        //     let time = 3;
+        //     w();
+        // }, 1000)
+
+        let time = 3;
+
+        let timer = setInterval(ww(time), 1000)
+
+        function w(time) {
+
+            const p = document.querySelector('p');
+            console.log(time);
+            p.innerHTML = time;
+            if (time === 0) {
+
+                section.classList.add('hidden')
+                setTimeout(function () {
+                    section.classList.remove('hidden')
+
+                    section.innerHTML =
+                        `<p>go</p> 
+                    <button>replay</button>`
+                    clearInterval(timer);
+                }, 300)
+            }
+
+        }
+
+        function ww(time) {
+            return function () {
+                time--;
+                w(time);
+            }
+        }
+
+        section.addEventListener('click', function (e) {
+            if (e.target && e.target.nodeName.toLowerCase() == "button") {
+                section.innerHTML =
+                    `<p>3</p>
+                 <div>goal</div>`
+
+
+                let timer1 = setInterval(ww(time), 1000)
+                setTimeout(function () {
+                    clearInterval(timer1);
+                }, 3000)
+            }
+        })
+
+    </script> -->
+</body>
+
+</html>
