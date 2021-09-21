@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: content-box;
+        }
+
+        body {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bg {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            filter: blur(25px);
+            background: url(https://i2.kurocore.com/img-master/img/2015/03/19/19/59/46/49361111_p0_master1200.jpg) no-repeat center/cover;
+            z-index: -1;
+            transition: all .5s;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: white;
+            border-radius: 5px;
+            padding: 40px;
+
+        }
+
+        input {
+            height: 30px;
+            margin: 10px 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        input::placeholder {
+            color: #acb6c3;
+        }
+
+        h3 {
+            margin: 20px;
+        }
+
+        input[type="submit"] {
+            color: white;
+            background: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg"></div>
+    <form action="">
+        <h3>输入密码来查看效果 </h3>
+        <label for="name">用户名:</label>
+        <input type="text" id="name" placeholder="输入用户名">
+        <label for="pwd">密码:</label>
+        <input type="text" id="pwd" placeholder="输入密码">
+        <input type="submit">
+    </form>
+
+    <script>
+        const pwd = document.querySelector('#pwd');
+        const bg = document.querySelector('.bg');
+        pwd.addEventListener('input', function () {
+            let blur = pwd.value.length;
+            let realb = 25 - blur * 5;
+            bg.style.filter = 'blur(' + realb + 'px)';
+        })
+    </script>
+</body>
+
+</html>
