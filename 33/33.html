@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            background: url(https://i2.kurocore.com/img-master/img/2017/09/01/00/29/52/64724388_p0_master1200.jpg) no-repeat center/cover;
+            overflow: hidden;
+        }
+
+        button {
+            width: 100px;
+            height: 50px;
+            margin: 30px;
+        }
+
+        section {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        textarea {
+            width: 400px;
+            height: 200px;
+            resize: none;
+            outline: 0;
+            font-size: 20px;
+            padding: 10px;
+        }
+
+        .box {
+            width: 400px;
+            background-color: #c03f18d7;
+            margin: 20px;
+            box-shadow: 1px 1px 10px 5px #00000085;
+        }
+
+        .nav {
+            width: 100%;
+            padding: 10px;
+        }
+
+        span {
+            user-select: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <button class='create'>新建便签</button>
+    <button class='deleteall'>一键清除</button>
+    <section></section>
+
+    <script>
+        const create = document.querySelector('.create');
+        const deleteall = document.querySelector('.deleteall');
+        const section = document.querySelector('section');
+
+        const notes = JSON.parse(localStorage.getItem('notes'))
+
+        if (notes) {
+            notes.forEach(note => createbox(note))
+        }
+
+        create.addEventListener('click', () => { createbox() })
+
+        function createbox(content = '') {
+            const box = document.createElement('div');
+            box.classList.add('box')
+            const textarea = document.createElement('textarea');
+            textarea.innerHTML = content;
+            box.innerHTML = `<div class="nav">  <span class="modify" >编辑</span>  <span class="delete">删除</span> </div>`
+
+            if (section.childElementCount < 12) {
+                box.appendChild(textarea);
+                section.appendChild(box);
+            }
+            updateLS()
+            //这里用document.querySelector('textarea')会重复找第一个
+            const text = box.querySelector('textarea');
+            console.log(text);
+            text.addEventListener('input', function () {
+                updateLS()
+            })
+        }
+
+        deleteall.addEventListener('click', function () {
+            section.innerHTML = '';
+            updateLS()
+        })
+
+        section.addEventListener('click', function (e) {
+            const nav = e.target.parentElement
+            if (e.target && e.target.className == "modify") {
+                const textarea = nav.nextElementSibling;
+                if (textarea.disabled) textarea.disabled = '';
+                else textarea.disabled = 'disabled';
+                updateLS()
+
+            }
+            if (e.target && e.target.className == "delete") {
+                this.removeChild(nav.parentElement);
+                updateLS()
+
+            }
+        });
+
+        function updateLS() {
+            const notesText = document.querySelectorAll('textarea')
+
+            const notes = []
+
+            notesText.forEach(note => notes.push(note.value))
+
+            localStorage.setItem('notes', JSON.stringify(notes))
+        }
+    </script>
+</body>
+
+</html>
