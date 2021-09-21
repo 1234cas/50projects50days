@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: content-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .box {
+            display: flex;
+            /* 不换行有惊喜 */
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: center;
+            width: 1380px;
+            height: 900px;
+            perspective: 100px;
+            transform-style: preserve-3d;
+        }
+
+        .part {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background: url(https://i2.kurocore.com/img-master/img/2015/03/19/19/59/46/49361111_p0_master1200.jpg) no-repeat;
+            background-position: 0 0;
+            background-size: 1200px 800px;
+            /* 用这个会让效果看起来像监狱  */
+            /* margin: 10px;
+            box-shadow: 1px 1px 10px 10px black; */
+            margin: 15px;
+            /* box-shadow: 10px 15px 0px 0px black; */
+            transition: all 1s;
+        }
+
+        .part::before {
+            position: absolute;
+            /* 平行四边形 top为width一半 */
+            top: 5px;
+            right: -10px;
+            width: 10px;
+            height: 200px;
+            background-color: #24256E;
+            content: '';
+            transform: skewY(45deg);
+        }
+
+        .part::after {
+            position: absolute;
+            top: 200px;
+            right: -5px;
+            width: 200px;
+            height: 10px;
+            background-color: #CF84A2;
+            content: '';
+            transform: skewX(45deg);
+        }
+
+        .after {
+            box-shadow: none;
+            margin: 0;
+            /* 这个也是一个效果 */
+            /* transform: rotate3d(1080deg); */
+            /* transform: rotatey(1080deg); */
+            /* transform: rotatex(1080deg); */
+            transform: rotatez(360deg);
+        }
+
+        button {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <button></button>
+    <script>
+        const box = document.querySelector('.box')
+        const btn = document.querySelector('button');
+
+        btn.addEventListener('click', function () {
+            box.childNodes.forEach(part => {
+                part.classList.toggle('after')
+            });
+        })
+
+        separate()
+        function separate() {
+            for (let i = 0; i < 4; i++) {
+                for (let j = 0; j < 6; j++) {
+                    const div = document.createElement('div');
+                    div.classList.add('part')
+                    div.style.backgroundPosition = -200 * j + 'px ' + -200 * i + 'px'
+                    box.appendChild(div);
+                }
+            }
+
+        }
+    </script>
+</body>
+
+</html>
