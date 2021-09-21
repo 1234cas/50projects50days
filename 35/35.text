@@ -1,0 +1,2 @@
+   /* 没有设置border-style: solid;会导致左右按钮显示不同的颜色 */
+            /* border-style: solid; */

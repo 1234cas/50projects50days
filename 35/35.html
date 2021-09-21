@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: content-box;
+        }
+
+        body {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+
+        section {
+            width: 400px;
+            height: 600px;
+            overflow: hidden;
+            box-shadow: 2px 1px 20px 11px black;
+        }
+
+        ul {
+            height: 100%;
+            width: 2000px;
+            transition: all 1s;
+        }
+
+        img {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+
+        button {
+            position: absolute;
+            background-color: transparent;
+            right: 35%;
+            border-width: 30px 0 30px 30px;
+            border-color: transparent transparent transparent #ffbd22d7;
+            /* 没有设置border-style: solid;会导致左右按钮显示不同的颜色 */
+            border-style: solid;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button.pre {
+            left: 35%;
+            border-width: 30px 30px 30px 0;
+            border-color: transparent #ffbd22d7 transparent transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <ul>
+            <img src="https://i2.kurocore.com/img-master/img/2014/05/07/10/09/43/43358079_p0_master1200.jpg" alt="">
+            <img src="https://i2.kurocore.com/img-master/img/2017/03/03/14/55/21/58148864_p0_master1200.jpg" alt="">
+            <img src="https://i2.kurocore.com/img-master/img/2015/05/27/00/01/31/50577795_p0_master1200.jpg" alt="">
+            <img src="https://i2.kurocore.com/img-master/img/2019/04/20/00/00/05/74279771_p0_master1200.jpg" alt="">
+        </ul>
+
+    </section>
+    <button class="pre"></button>
+    <button class="next"></button>
+    <script>
+        const ul = document.querySelector('ul');
+        const btns = document.querySelectorAll('button');
+        const imgnum = ul.childElementCount;
+
+        let index = 0;
+
+        btns[0].addEventListener('click', function () {
+            clearInterval(auto);
+            index--;
+            if (index < 0) index = imgnum - 1;
+            ul.style.transform = 'translateX(' + -400 * index + 'px)'
+        })
+
+        function next() {
+            index++;
+            if (index == imgnum) index = 0;
+            ul.style.transform = 'translateX(' + -400 * index + 'px)'
+        }
+
+        btns[1].addEventListener('click', function () {
+            clearInterval(auto);
+            next();
+        })
+
+        ul.addEventListener('transitionend', function () {
+            clearInterval(auto);
+
+            auto = setInterval(next, 2500);
+        })
+
+        let auto = setInterval(next, 2500);
+
+
+    </script>
+</body>
+
+</html>
