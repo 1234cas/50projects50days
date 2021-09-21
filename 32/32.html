@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: content-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            background-color: lightblue;
+        }
+
+        section {
+            display: flex;
+            flex-wrap: wrap;
+            width: 200px;
+            margin: 20px;
+        }
+
+        button {
+            width: 100px;
+            height: 50px;
+            border-radius: 30px;
+            background-color: #d0d0d0;
+            border: 0px;
+            transition: all .5s;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        button.active {
+            background-color: teal;
+        }
+
+        span {
+            line-height: 70px;
+            font-size: 20px;
+        }
+
+        strong {
+            font-size: 25px;
+        }
+
+        div {
+            display: inline-block;
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            background-color: #fff;
+            transition: all .5s;
+            margin-right: 50px;
+        }
+
+        button.active div {
+            margin-left: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>鱼和熊掌不可兼得</h1>
+
+    <section>
+        <button>
+            <div></div>
+        </button>
+        <span>女<strong>&#9994;</strong></span>
+        <button>
+            <div></div>
+        </button>
+        <span>脑子</span>
+        <button>
+            <div></div>
+        </button>
+        <span>网上出警</span>
+    </section>
+
+    <script>
+        const btns = document.querySelectorAll('button');
+
+        btns.forEach((btn, index) => {
+            btn.addEventListener('click', function () {
+                btn.classList.toggle('active');
+
+                let check = 1;
+                for (let i = 0; i < btns.length; i++) {
+                    if (btns[i].classList.contains('active')) check++;
+                }
+
+                if (check > btns.length) {
+                    index--;
+                    if (index < 0) index = btns.length - 1;
+                    btns[index].classList.remove('active');
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
