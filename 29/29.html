@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 90vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            user-select: none;
+        }
+
+        .box {
+            height: 700px;
+            width: 500px;
+            background: url(https://i2.kurocore.com/img-master/img/2020/06/21/00/15/12/82456228_p0_master1200.jpg) no-repeat center/cover;
+            border-radius: 3px;
+            box-shadow: 1px 1px 5px 5px black;
+        }
+
+        .before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 2px;
+            opacity: 1;
+            color: white;
+        }
+
+        .after {
+            transform: scale(70);
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.16, 0.05, 0.22, 1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <h3>双击图片有小闪电</h3>
+    <p>你已经有0条小闪电</p>
+    <div class="box">
+        <svg class="before" id="i-lightning" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32"
+            height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="2">
+            <path d="M18 13 L26 2 8 13 14 19 6 30 24 19 Z" />
+        </svg>
+    </div>
+    <script>
+        const box = document.querySelector('.box');
+        const lightning = document.querySelector('.before');
+        const p = document.querySelector('p');
+
+        const color = ['rgb(0, 4, 255)', 'black', 'white'];
+        let i = 0;
+
+        box.addEventListener('dblclick', function (e) {
+
+            i++;
+            p.innerHTML = '你已经有' + i + '条小闪电';
+
+            lightning.style.color = color[Math.ceil(Math.random() * color.length)];
+            lightning.style.left = e.clientX + 'px';
+            lightning.style.top = e.clientY + 'px';
+
+            setTimeout(function () {
+                lightning.classList.add('after');
+            }, 100)
+
+            setTimeout(function () {
+                lightning.classList.remove('after');
+            }, 700)
+        })
+    </script>
+</body>
+
+</html>
