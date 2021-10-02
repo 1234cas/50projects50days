@@ -1,0 +1,294 @@
+1
+   不用绝对定位不好搞盒子的垂直居中
+   子元素top：50%不生效是因为父元素没有设置高度 letf：50%生效是因为块默认100%宽
+   滚动条取消 overflow-y: hidden; overflow:hidden也可以
+   height: 100vh; weight:100vw;
+   唯一没做好的就是字 没做到淡入的效果 他用的opacity
+   他设置了background-position: center; 小图片的时候会显示中间 变大的时候会向两边摊开 
+   重点：
+   利用.pic.active和.pic.active span进行css属性设置 当active类被移除 .pic.active span就自然失效 一举两得
+   我们就不用再获取span进行显示隐藏操作 只通过一个类的添加删除完成一个模块的变化
+
+2
+flex布局换行：超出超出父盒子宽度就会自动换行
+他的做法是用before做一个灰色的条 然后用js来控制蓝色盒子的长度来实现进度条的效果
+我的做法是给边框的变化加过度
+cursor鼠标样式
+
+3
+他的做法 给body设背景颜色 当主体旋转时 body露出的同时文字从右侧滑入 一起出现 和谐美
+但是他这个往下滑就不好看了
+我的做法 左边利用边框直接整一个三角形 左上角是一个圆 把字体图标定位到4个角
+重点：
+nav ul li + li或者li:nth-child()
+transform-origin: 0 0;
+transform: rotate(19deg);
+三角形做法 width:0; height:0; boder-color:transparent transparent red transparent;
+boder-style:solid; boder-width:22px 8px 0 0; 
+this.getAttribute('class') ? this.classList.remove('active') : this.classList.add('active');
+text-transform: uppercase;变大写
+
+4
+重点：
+在div中input和button中有一个小间隔 这个间隔不知道是啥
+但是他可以被我选中 于是就被我用font-size:0解决
+然后上下不对齐用 vertical-align:bottom解决
+input.classList.toggle('active'); 这个写法直接把我前面的三元表达式秒杀
+autofocus placeholder这些属性属于html属性 只能写在行内
+可以用input.placeholder=''直接修改 因为js对属性的操作的会变成行内样式
+justify-content: center; 利用flex居中元素再让他们收缩 就会从两边收缩
+outline: none;
+classList.add/remove/toggle/contains() 都是方法
+
+5
+清除定时器window.clearInterval(time1);
+body加filter:blur(10px);对背景图片不生效
+复合写法的background的cover和contain必须写成center/cover
+   user-select:none;文字无法选中
+   background:inherit
+
+6
+div:nth-of-type(odd/even)
+const divtop = div.getBoundingClientRect().top; 拿到元素相对于视窗的相对距离
+let win = window.innerHeight / 4 * 3;
+
+7
+左边ps的图片最后会放大一下是因为图片大小和设置了cover的原因
+并集选择器可以一个全写，另一个单独写一下独立的属性，这样就会覆盖前面的设置
+像这样
+   .o::before,
+        .t::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(87, 84, 236, 0.7);
+        }
+
+        .t::before {
+            background-color: rgba(43, 43, 43, 0.8);
+        }
+
+css多个背景的应用 不能用颜色 但是可以用渐变 可以用渐变来做滤镜
+background: linear-gradient(to right, rgba(30, 75, 115, .8), rgba(255, 255, 255, 0)) no-repeat right center/cover, url(https://img.kurocore.com/pi/082/432/82432221_0.jpg) no-repeat right center/cover;
+
+8
+这个效果我不会做
+
+focus和blur事件
+label的for属性写要绑定的input
+input:valid
+.box input:focus+label span,
+.box input:valid+label span {
+    color: lightblue;
+    transform: translateY(-30px);
+   }
+这个写法对结构顺序有要求 label必须是在input:focus下面 如果label元素在input的上方则无法生效
+pointer-events: none;
+可以阻止用户的点击动作产生任何效果
+阻止缺省鼠标指针的显示
+阻止CSS里的hover和active状态的变化触发事件
+阻止JavaScript点击动作触发的事件
+但是不能做很关键的禁止 因为会被js给改
+
+9
+我想覆盖掉只允许播放一个音频的click事件 但是我禁止不了audio.pause()
+用audio.play又会导致全部一起播放
+然后我就把addEventListener改为了onclick
+因为onclick只能绑定一个 所以会覆盖前面的绑定事件
+
+10 
+调用接口有多种方法
+ajax axios fetch 还有一些接口文档里面规定的方法
+
+12
+ /* 用flex布局时盒子大小变化会影响上下盒子的位置 然后btn的位置就移动了 不在原地 用户得动鼠标才能点到 用户体验不好
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; */
+/* 这里用百分比会因为父盒子高度变化跟着变 所以用固定值 但是因为用了旋转还是会位移一丢丢
+            top: 28%;
+            right: 6%; */
+
+13
+textarea的margin不生效是因为他是行内元素
+
+14
+原生js获取的DOM集合是一个类数组对象，不能直接利用数组的方法
+可以用扩展运算符来转化
+  点击滑动的时候ul会直接跳过去就是因为没有设初始宽度 
+  如果没有初始的宽度 就没有宽度变化 width就变成宽度设置 所以会一下子就跳过去
+  元素出问题很有可能就是什么属性没设
+
+15
+        这个= +是隐式转换 把后面的值变成正数 -负数
+        const target = +counter.getAttribute('data-target')
+        const c = +counter.innerText
+
+        他的做法是判断<还是= <的时候就一直递归 =就不操作
+        我的是设个定时器 通过控制时间来停止 他是通过数值判断来停止递归
+
+        过于重复的代码可以用函数或者循环以及数组等来进行简化
+
+16
+*比继承的属性优先级高 继承是最低的
+不直接在变量定义的时候加%是因为加了之后转不了number 不知道为什么
+好像是因为%无法被识别为数字
+//line-height要改成lineHeight 不是line_height
+
+18
+     调整img标签的位置        
+    object-fit: none;
+    object-position: 10% 10%;
+    调整imgbox的位置                
+    position: absolute;
+    top: -15vh;
+    left: -15vw;
+    把当前盒子的背景图片给body 
+    document.body.style.background = imgboxs[index].style.background;
+
+19
+通过自定义css变量来设置属性 在切换时改变自定义变量即可 就不用挨个改变子元素
+:root {
+  --primary-color: #000;
+  --secondary-color: #fff;
+}
+html.dark {
+  --primary-color: #fff;
+  --secondary-color: #333;
+}
+看一下原项目的demo就知道了
+
+// StackOverflow https://stackoverflow.com/questions/10756313/javascript-jquery-map-a-range-of-numbers-to-another-range-of-numbers
+const scale = (num, in_min, in_max, out_min, out_max) => {
+    return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+把在一个范围内的一个数的位置等比的映射或者缩放到相同的位置 
+const num = 5;
+console.log(scale(num, 0, 10, -50, 50)); // 0
+console.log(scale(num, -20, 0, -100, 100)); // 150
+
+20
+        @keyframes scale {
+            to {
+                transform: translate(-50%, -50%) scale(3);
+                opacity: 0;
+            }
+        }
+        定时器的函数写箭头函数
+
+21
+for of for in 
+this.className += ' hold'
+https://source.unsplash.com/random/150x150 可以根据自己的需求来调大小
+
+drag事件
+注意： 为了让元素可拖动，需要使用 HTML5 draggable 属性。
+
+提示： 链接和图片默认是可拖动的，不需要 draggable 属性。
+
+在拖放的过程中会触发以下事件：
+
+在拖动目标上触发事件 (源元素):
+ondragstart - 用户开始拖动元素时触发
+ondrag - 元素正在拖动时触发
+ondragend - 用户完成元素拖动后触发
+
+释放目标时触发的事件:
+ondragenter - 当被鼠标拖动的对象进入其容器范围内时触发此事件
+ondragover - 当某被拖动的对象在另一对象容器范围内拖动时触发此事件
+ondragleave - 当被鼠标拖动的对象离开其容器范围内时触发此事件
+ondrop - 在一个拖动过程中，释放鼠标键时触发此事件
+//默认情况下,数据/元素不能在其他元素中被拖放 对于drop我们必须防止元素的默认处理
+
+24
+不会做光影效果 就是用动画调整渐变的位置做出一个动态效果
+        .animated-bg {
+            background-image: linear-gradient(to right,
+                    #f6f7f8 0%,
+                    #edeef1 10%,
+                    #f6f7f8 20%,
+                    #f6f7f8 100%);
+            background-size: 200% 100%;
+            animation: bgPos 1s linear infinite;
+        }
+
+        .animated-bg-text {
+            border-radius: 50px;
+            display: inline-block;
+            margin: 0;
+            height: 10px;
+            width: 100%;
+        }
+
+        @keyframes bgPos {
+            0% {
+                background-position: 50% 0;
+            }
+
+            100% {
+                background-position: -150% 0;
+            }
+        }
+
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.445);
+
+25
+pageYOffset 和 scrollY都能返回视窗滚动过的距离 都是window对象的属性 scrollY可设值
+
+26
+    let imglength = right.childElementCount - 1;
+    两个元素相向而行       
+     left.style.transform = 'translateY(' + (imglength - index) * -100 + 'vh)'
+     right.style.transform = 'translateY(' + index * -100 + 'vh)'
+
+    letter-spacing 字和字的距离
+
+    function getRandomMessage() {
+        return messages[Math.floor(Math.random() * messages.length)]
+    }
+
+27
+ box.removeChild(div);和div.remove();效果一样
+/* 如果不设flex 新产生的消息会影响之前消息的盒子大小 这是为什么 */
+
+28
+
+29
+双击的写法
+loveMe.addEventListener('click', (e) => {
+    if(clickTime === 0) {
+        clickTime = new Date().getTime()
+    } else {
+        if((new Date().getTime() - clickTime) < 800) {
+            createHeart(e)
+            clickTime = 0
+        } else {
+            clickTime = new Date().getTime()
+        }
+    }
+})
+
+    鼠标在盒子内的坐标 e.clientX-e.target.offsetLeft
+    const x = e.clientX
+    const y = e.clientY
+
+    const leftOffset = e.target.offsetLeft
+    const topOffset = e.target.offsetTop
+
+    const xInside = x - leftOffset
+    const yInside = y - topOffset
+
+    cubic-bezier(0.16, 0.05, 0.22, 1.1);
+
+30
+函数递归 一直自调用 通过输入来调整截取显示每个字节的速度
+
+他settimeout每次一字符 通过输入来控制settimeout的间隔
+我setinterval一直输出 通过清除上一个定时器，重新设置定时器的间隔来控制速度
+
+重点：不要重复声明一个变量 声明过了就可以直接使用 (低级错误)
+
+substr(i, 1)
+join('')
