@@ -33,28 +33,22 @@
 
         .triangle1 {
             border-bottom: 80px solid rgba(255, 255, 255, 0.829);
-            animation: rotate1 2.5s infinite;
+            animation: rotate1 2s linear infinite;
         }
 
         .triangle2 {
             border-right: 80px solid rgba(121, 99, 99, 0.911);
-            animation: rotate2 2.5s infinite;
+            animation: rotate1 2s linear infinite .5s;
         }
 
+        /* 让两三角形调用同一个动画 但是让第二个延迟.5s就可以做到加载动画的效果 */
         @keyframes rotate1 {
-
-            /* to {
-                transform: rotate(360deg);
-            } */
 
             25% {
                 transform: rotate(0deg);
             }
 
-            50% {
-                transform: rotate(180deg);
-            }
-
+            50%,
             75% {
                 transform: rotate(180deg);
             }
@@ -64,11 +58,25 @@
             }
         }
 
-        @keyframes rotate2 {
+        /* @keyframes rotate2 {
 
-            /* to {
-                transform: rotate(360deg);
-            } */
+            0%,
+            25% {
+                transform: rotate(90deg);
+            }
+
+            50%,
+            75% {
+                transform: rotate(270deg);
+            }
+
+            100% {
+                transform: rotate(450deg);
+            }
+        } */
+
+        /* @keyframes rotate2 {
+
             25% {
                 transform: rotate(180deg);
             }
@@ -83,9 +91,9 @@
 
             100% {
                 transform: rotate(360deg);
-                /* transform: rotate(0); */
+                transform: rotate(0); 
             }
-        }
+        } */
     </style>
 </head>
 

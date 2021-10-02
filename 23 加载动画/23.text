@@ -1,0 +1,11 @@
+50% {
+    transform: rotate(180deg);
+}
+75% {
+    transform: rotate(360deg);
+}
+可以写成
+50% ,
+75% {
+    transform: rotate(360deg);
+}
