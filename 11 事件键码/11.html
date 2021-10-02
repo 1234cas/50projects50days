@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            background: linear-gradient(to right, rgba(30, 75, 115, .8), rgba(255, 255, 255, 0)), url(https://img.kurocore.com/pi/071/685/71685066_0.jpg) center/cover;
+        }
+
+        button {
+            width: 150px;
+            height: 60px;
+            margin: 10px;
+            font-size: 20px;
+            font-weight: 700;
+            vertical-align: middle;
+            line-height: 25px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <button style="width: 180px;">按键盘任意键</button>
+    <script>
+        document.body.addEventListener('keydown', function (e) {
+            document.body.innerHTML = `<button> ${e.code == 'Space' ? 'Space' : e.key} </button>    <button> ${e.keyCode}   </button>    <button>${e.code}</button> `
+        })
+    </script>
+
+</html>
