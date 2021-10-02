@@ -42,7 +42,6 @@
             height: 50px;
             background-color: rgba(255, 255, 255, 0.671);
             color: black;
-            transition: all .3s;
         }
 
         nav ul li {
@@ -146,9 +145,11 @@
     <script>
         const nav = document.querySelector('nav');
 
+        //监听页面的滚动
         document.addEventListener('scroll', function () {
-            // nav.offsetHeight
-            if (window.pageYOffset > nav.offsetHeight) {
+
+            // nav的高度nav.offsetHeight 页面卷去的长度window.pageYOffset 
+            if (window.pageYOffset > nav.offsetHeight + 150) {
                 nav.classList.add('afternav');
             } else {
                 nav.classList.remove('afternav');

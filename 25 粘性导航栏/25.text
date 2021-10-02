@@ -1,0 +1,1 @@
+pageYOffset 和 scrollY都能返回视窗滚动过的距离 都是window对象的属性 scrollY可设值
