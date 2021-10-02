@@ -120,18 +120,24 @@
         let index = 0;
         let imglength = right.childElementCount - 1;
 
+        //点击切换下一张
         next.addEventListener('click', function () {
             index++;
             if (index > imglength) index = 0;
-            left.style.transform = 'translateY(' + (2 - index) * -100 + 'vh)'
-            right.style.transform = 'translateY(' + index * -100 + 'vh)'
+            move(index);
         })
+        //点击切换上一张
         pre.addEventListener('click', function () {
             index--;
             if (index < 0) index = imglength;
-            left.style.transform = 'translateY(' + (2 - index) * -100 + 'vh)'
-            right.style.transform = 'translateY(' + index * -100 + 'vh)'
+            move(index);
         })
+
+        //实现切换
+        function move(index) {
+            left.style.transform = 'translateY(' + (imglength - index) * -100 + 'vh)'
+            right.style.transform = 'translateY(' + index * -100 + 'vh)'
+        }
     </script>
     <!-- 原项目 -->
     <script>

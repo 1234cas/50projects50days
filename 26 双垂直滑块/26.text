@@ -1,0 +1,11 @@
+    let imglength = right.childElementCount - 1;
+    两个元素相向而行       
+     left.style.transform = 'translateY(' + (imglength - index) * -100 + 'vh)'
+     right.style.transform = 'translateY(' + index * -100 + 'vh)'
+
+    letter-spacing 字和字的距离
+    
+    封装函数
+    function getRandomMessage() {
+        return messages[Math.floor(Math.random() * messages.length)]
+    }
