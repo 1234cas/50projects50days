@@ -1,0 +1,18 @@
+左边ps的图片最后会放大一下是因为图片大小和设置了cover的原因
+并集选择器可以一个全写，另一个单独写一下独立的属性，这样就会覆盖前面的设置
+像这样
+   .o::before,
+        .t::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(87, 84, 236, 0.7);
+        }
+
+        .t::before {
+            background-color: rgba(43, 43, 43, 0.8);
+        }
+
+css多个背景的应用 不能用颜色 但是可以用渐变 可以用渐变来做滤镜
+background: linear-gradient(to right, rgba(30, 75, 115, .8), rgba(255, 255, 255, 0)) no-repeat right center/cover, url(https://img.kurocore.com/pi/082/432/82432221_0.jpg) no-repeat right center/cover;
