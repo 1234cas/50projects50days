@@ -1,5 +1,0 @@
-清除定时器window.clearInterval(time1);
-body加filter:blur(10px);对背景图片不生效
-复合写法的background的cover和contain必须写成center/cover
-   user-select:none;文字无法选中
-   background:inherit
