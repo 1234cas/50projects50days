@@ -1,4 +1,0 @@
-我想覆盖掉只允许播放一个音频的click事件 但是我禁止不了audio.pause()
-用audio.play又会导致全部一起播放
-然后我就把addEventListener改为了onclick
-因为onclick只能绑定一个 所以会覆盖前面的绑定事件
