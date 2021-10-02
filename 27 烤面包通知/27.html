@@ -35,26 +35,23 @@
         }
 
         .box {
-            position: absolute;
+            position: fixed;
             right: 0;
             bottom: 0;
+            /* 如果不设flex 新产生的消息会影响之前消息的盒子大小 这是为什么 */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
         }
 
         .box div {
-            /* 如果这里不设行内块直接用div的话 下面就不用加br 但是这样会导致所有消息宽度一样 */
-            float: right;
-            /* 加了浮动 行内块就失效了  */
-            /* display: inline-block; */
-            position: relative;
-            top: 0;
-            right: 0;
+            padding: 1rem 2rem;
             height: 50px;
             line-height: 50px;
             font-size: 20px;
             margin: 10px;
             background-color: rgb(255, 255, 255);
             border-radius: 10px;
-            padding: 10px;
         }
     </style>
 </head>
@@ -66,22 +63,27 @@
         const btn = document.querySelector('button');
         const box = document.querySelector('.box');
 
-        const colorarr = ['#0800FF', '#B500FF', '#EE481A'];
+        const colorarr = ['#0800FF', '#B500FF', '#EE481A', '#008080'];
         const htmlarr = ['one', 'two', 'three', 'four'];
 
+        //点击吐信息
         btn.addEventListener('click', function () {
             let random = Math.floor(Math.random() * 4);
             const div = document.createElement('div');
+            const br = document.createElement('br');
+
+            //添加样式并添加到box中
             div.innerHTML = 'message' + '&nbsp' + htmlarr[random];
             div.style.color = colorarr[random];
             box.appendChild(div);
-            const br = document.createElement('br');
-            box.appendChild(br);
+            // box.appendChild(br);
 
-            setTimeout(function () {
-                box.removeChild(div);
-                box.removeChild(br);
-            }, 3000)
+            //定时消失
+            // setTimeout(function () {
+            //     // box.removeChild(div);
+            //     div.remove();
+            //     box.removeChild(br);
+            // }, 3000)
         })
     </script>
 </body>

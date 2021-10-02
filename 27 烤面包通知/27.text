@@ -1,0 +1,2 @@
+ box.removeChild(div);和div.remove();效果一样
+/* 如果不设flex 新产生的消息会影响之前消息的盒子大小 这是为什么 */
