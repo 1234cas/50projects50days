@@ -1,0 +1,25 @@
+双击的写法
+loveMe.addEventListener('click', (e) => {
+    if(clickTime === 0) {
+        clickTime = new Date().getTime()
+    } else {
+        if((new Date().getTime() - clickTime) < 800) {
+            createHeart(e)
+            clickTime = 0
+        } else {
+            clickTime = new Date().getTime()
+        }
+    }
+})
+
+鼠标在盒子内的坐标 e.clientX-e.target.offsetLeft
+    const x = e.clientX
+    const y = e.clientY
+
+    const leftOffset = e.target.offsetLeft
+    const topOffset = e.target.offsetTop
+
+    const xInside = x - leftOffset
+    const yInside = y - topOffset
+
+    cubic-bezier(0.16, 0.05, 0.22, 1.1);

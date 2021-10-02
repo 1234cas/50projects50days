@@ -66,15 +66,19 @@
         const color = ['rgb(0, 4, 255)', 'black', 'white'];
         let i = 0;
 
+        //监听盒子的双击事件
         box.addEventListener('dblclick', function (e) {
 
             i++;
             p.innerHTML = '你已经有' + i + '条小闪电';
 
+            //为闪电添加样式 这闪电是本身就存在在文档中的 不是创造出来的 所以不用create和append 通过类来控制显示隐藏
+            //直接用clientX没有用在盒子的定位是因为闪电的父盒子没有相对定位 所以他的绝对定位就是相对于document的 client就可以直接当left
             lightning.style.color = color[Math.ceil(Math.random() * color.length)];
             lightning.style.left = e.clientX + 'px';
             lightning.style.top = e.clientY + 'px';
 
+            //添加删除类
             setTimeout(function () {
                 lightning.classList.add('after');
             }, 100)
