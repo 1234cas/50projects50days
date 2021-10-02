@@ -1,4 +1,4 @@
-不会做光影效果 就是用动画调整渐变的位置做出一个动态效果
+不会做光影效果 这个效果就是用动画调整渐变的位置做出一个动态效果
         .animated-bg {
             background-image: linear-gradient(to right,
                     #f6f7f8 0%,

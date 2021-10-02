@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css.css">
     <style>
         * {
             margin: 0;
@@ -68,6 +69,7 @@
             vertical-align: top;
         }
 
+        /* 移动渐变来实现动态效果 */
         .animated-bg {
             background-image: linear-gradient(to right,
                     #f6f7f8 0%,
@@ -129,6 +131,7 @@
         const animated_bgs = document.querySelectorAll('.animated-bg')
         const animated_bg_texts = document.querySelectorAll('.animated-bg-text')
 
+        //清除占位符
         function ww() {
             artimg.innerHTML = '<img src="https://img.kurocore.com/pi/059/322/59322814_0.jpg" alt="">';
             h3.innerHTML = '9月6日';
@@ -139,7 +142,7 @@
             animated_bg_texts.forEach((bg) => bg.classList.remove('animated-bg-text'))
         }
 
-
+        //调用函数
         // setTimeout(ww, 2000)
     </script>
 </body>
