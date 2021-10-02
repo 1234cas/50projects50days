@@ -1,0 +1,8 @@
+        这个= +是隐式转换 把后面的值变成正数 -负数
+        const target = +counter.getAttribute('data-target')
+        const c = +counter.innerText
+
+        他的做法是判断<还是= <的时候就一直递归 =就不操作
+        我的是设个定时器 通过控制时间来停止 他是通过数值判断来停止递归
+
+        过于重复的代码可以用函数或者循环以及数组等来进行简化
