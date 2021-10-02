@@ -1,6 +1,0 @@
-    调整img标签的位置        object-fit: none;
-            object-position: 10% 10%;
-    调整imgbox的位置                position: absolute;
-            top: -15vh;
-            left: -15vw;
-    把当前盒子的背景图片给body                 document.body.style.background = imgboxs[index].style.background;

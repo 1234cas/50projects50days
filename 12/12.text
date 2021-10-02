@@ -1,8 +1,0 @@
- /* 用flex布局时盒子大小变化会影响上下盒子的位置 然后btn的位置就移动了 不在原地 用户得动鼠标才能点到 用户体验不好
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center; */
-/* 这里用百分比会因为父盒子高度变化跟着变 所以用固定值 但是因为用了旋转还是会位移一丢丢
-            top: 28%;
-            right: 6%; */
