@@ -83,29 +83,40 @@
             box.addEventListener('dragleave', dragLeave)
             box.addEventListener('drop', dragDrop)
         })
-
+        //拖动开始时触发
+        //拖动开始时把原图片删除 因为是通过类设置 所以移除类即可
         function dragStart() {
-            this.classList.add('hold');
-            setTimeout(() => this.className = 'invisible', 0)
+            console.log(this);
+            setTimeout(() => this.className = '', 0)
         }
-
+        //拖动结束时触发
+        //为拖动的图片添加类
         function dragEnd() {
+            console.log(this);
             this.className = 'img'
         }
 
+        //以上两个的this都是指向被拖动元素 以下五个this指向容器
+        // drag在拖动时触发 
+
+        //在容器里面移动时触发
+        //默认情况下,数据/元素不能在其他元素中被拖放 对于drop我们必须防止元素的默认处理
         function dragOver(e) {
             e.preventDefault()
         }
-
+        //进入容器时触发
+        //拖动进入容器时添加样式提醒用户可放置
         function dragEnter(e) {
-            e.preventDefault()
+            // e.preventDefault()
             this.className += ' hovered'
         }
-
+        //离开容器时触发
+        //取消提醒样式 
         function dragLeave() {
             this.className = 'box'
         }
-
+        //释放鼠标时触发 会比dragend先触发
+        //取消提醒样式 并将拖动的图片添加到容器中
         function dragDrop() {
             this.className = 'box'
             this.append(img)
