@@ -1,0 +1,19 @@
+通过自定义css变量来设置属性 在切换时改变自定义变量即可 就不用挨个改变子元素
+:root {
+  --primary-color: #000;
+  --secondary-color: #fff;
+}
+html.dark {
+  --primary-color: #fff;
+  --secondary-color: #333;
+}
+看一下原项目的demo就知道了
+
+// StackOverflow https://stackoverflow.com/questions/10756313/javascript-jquery-map-a-range-of-numbers-to-another-range-of-numbers
+const scale = (num, in_min, in_max, out_min, out_max) => {
+    return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+把在一个范围内的一个数的位置等比的映射或者缩放到相同的位置 
+const num = 5;
+console.log(scale(num, 0, 10, -50, 50)); // 0
+console.log(scale(num, -20, 0, -100, 100)); // 150

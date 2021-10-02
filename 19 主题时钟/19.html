@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Heebo:300&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            background-color: white;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all .5s;
+            font-family: 'Heebo', sans-serif;
+        }
+
+        button {
+            width: 80px;
+            height: 40px;
+            border-radius: 20px;
+        }
+
+        .dark {
+            background-color: #111111;
+            transition: all .5s;
+            color: #fff;
+        }
+
+        #circle {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #circle div {
+            width: 2px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: 0 0;
+            transform: rotateZ(180deg);
+            transition: all 1s;
+        }
+
+        #hour {
+            height: 20%;
+            background-color: rgb(42, 165, 89);
+        }
+
+        #minute {
+            height: 30%;
+            background-color: rgb(79, 42, 165)
+        }
+
+        #second {
+            height: 40%;
+            background-color: brown
+        }
+
+        .center {
+            background-color: #e74c3c;
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+
+        .center::after {
+            content: '';
+            background-color: #fff;
+            width: 5px;
+            height: 5px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+
+        .time {
+            font-size: 60px;
+            font-family: 'Heebo', sans-serif;
+        }
+
+        .date {
+            text-align: center;
+            color: #aaa;
+            font-size: 14px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .date .c {
+            background-color: #111111;
+            color: #fff;
+            border-radius: 50%;
+            height: 18px;
+            width: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 18px;
+            transition: all 0.5s ease-in;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <button>日间</button>
+    <div id="circle">
+        <div id="hour"></div>
+        <div id="minute"></div>
+        <div id="second"></div>
+        <span class="center"></span>
+    </div>
+    <section id="time">
+        <div class="time"></div>
+        <div class="date"></div>
+    </section>
+    <script>
+
+        const btn = document.querySelector('button');
+
+        btn.addEventListener('click', function () {
+            // 文字怎么切换
+            // 通过判断类来进行切换文字和类
+            const body = document.querySelector('body')
+            if (body.classList.contains('dark')) {
+                body.classList.remove('dark')
+                btn.innerHTML = '日间'
+            } else {
+                body.classList.add('dark')
+                btn.innerHTML = '夜间'
+            }
+            // document.body.classList.toggle('dark');
+        })
+
+        //时分秒针的移动
+        const second = document.querySelector('#second');
+        const minute = document.querySelector('#minute');
+        const hour = document.querySelector('#hour');
+
+        let sdeg = 180;
+        let mdeg = 180;
+        let hdeg = 180;
+
+        setInterval(() => {
+            sdeg += 6;
+            second.style.transform = 'rotateZ(' + sdeg + 'deg)'
+        }, 1000)
+        setInterval(() => {
+            mdeg++;
+            minute.style.transform = 'rotateZ(' + mdeg + 'deg)'
+        }, 10000)
+        setInterval(() => {
+            hdeg++;
+            hour.style.transform = 'rotateZ(' + hdeg + 'deg)'
+        }, 600000)
+
+        //日期格式化
+        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        const timebox = document.querySelector('.time');
+        const datebox = document.querySelector('.date');
+
+        function setTime() {
+            const time = new Date();
+            const month = time.getMonth()
+            const day = time.getDay()
+            const date = time.getDate()
+            const hours = time.getHours()
+            const hoursForClock = hours >= 13 ? hours % 12 : hours;
+            const minutes = time.getMinutes()
+            const seconds = time.getSeconds()
+            const ampm = hours >= 12 ? 'PM' : 'AM'
+
+            timebox.innerHTML = `${hoursForClock}:${minutes < 10 ? `0${minutes}` : minutes} ${ampm}`;
+            datebox.innerHTML = `${days[day]}, ${months[month]} <span class="c">${date}</span>`;
+
+        }
+        setTime();
+        setInterval(setTime, 1000);
+    </script>
+</body>
+
+</html>
