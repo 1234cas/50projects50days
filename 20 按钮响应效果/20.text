@@ -1,0 +1,8 @@
+        @keyframes scale {
+            to {
+                transform: translate(-50%, -50%) scale(3);
+                opacity: 0;
+            }
+        }
+        定时器的函数写箭头函数
+         btn.removeChild(w)可以改为w.remove()
