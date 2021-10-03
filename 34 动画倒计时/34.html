@@ -51,9 +51,12 @@
 
         .timer ul li.active {
             /* transform: rotate(-180deg); */
-            animation: ww 2s;
+            animation: ww 1s;
         }
 
+        .replay {
+            display: none;
+        }
 
         @keyframes ww {
             30% {
@@ -94,9 +97,6 @@
                 transform: rotate(-180deg);
             }
         } */
-        .replay {
-            display: none;
-        }
     </style>
 </head>
 
@@ -122,23 +122,27 @@
         let i = 0;
 
         function timer() {
+            //开启播放动画的定时器
             let timer = setInterval(function () {
                 lis[i].classList.toggle('active');
                 i++;
-                console.log(i);
-                if (i > 3) {
+
+                //大于li的个数就说明动画结束 进行初始化
+                if (i > lis.length - 1) {
                     clearInterval(timer)
                     i = 0;
                     setTimeout(function () {
                         lis.forEach(li => li.classList.toggle('active'));
                         replay.previousElementSibling.style.display = 'none';
                         replay.style.display = 'block';
-                    }, 2000)
+                    }, 1000)
 
                 }
-            }, 2000)
+            }, 1000)
         }
         timer();
+
+        //replay 显示切换
         replay.addEventListener('click', function () {
             replay.previousElementSibling.style.display = 'flex';
             replay.style.display = 'none';
