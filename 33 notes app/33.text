@@ -1,0 +1,7 @@
+他只用了两个函数 一个生成note 一个更新数据 一系列点击事件在note添加的时候就绑定了
+不用像我用事件委托的方式 太零散
+
+他的textarea下面还有一个div用来显示内容 当点编辑的时候textarea会隐藏 div会显示 这样子就实现了取消编辑的效果
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.2.2/marked.min.js"></script>
+    marked()

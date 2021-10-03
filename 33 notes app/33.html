@@ -63,20 +63,23 @@
     <button class='create'>新建便签</button>
     <button class='deleteall'>一键清除</button>
     <section></section>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.2.2/marked.min.js"></script>
     <script>
         const create = document.querySelector('.create');
         const deleteall = document.querySelector('.deleteall');
         const section = document.querySelector('section');
 
+        //读取本地数据localStorage.getItem('notes')
         const notes = JSON.parse(localStorage.getItem('notes'))
-
+        //存在本地数据就加载
         if (notes) {
             notes.forEach(note => createbox(note))
         }
 
+        //绑定点击添加事件
         create.addEventListener('click', () => { createbox() })
 
+        //添加note
         function createbox(content = '') {
             const box = document.createElement('div');
             box.classList.add('box')
@@ -87,21 +90,25 @@
             if (section.childElementCount < 12) {
                 box.appendChild(textarea);
                 section.appendChild(box);
+                //想看marked效果可以把下面这个取消注释
+                // textarea.previousElementSibling.innerHTML = marked(content)
             }
             updateLS()
             //这里用document.querySelector('textarea')会重复找第一个
             const text = box.querySelector('textarea');
-            console.log(text);
+            //在添加note时给文本域添加一个输入事件 输入时更新本地数据
             text.addEventListener('input', function () {
                 updateLS()
             })
         }
 
+        //删除全部
         deleteall.addEventListener('click', function () {
             section.innerHTML = '';
             updateLS()
         })
 
+        //事件委托 修改按钮和删除按钮 可以写在note里面
         section.addEventListener('click', function (e) {
             const nav = e.target.parentElement
             if (e.target && e.target.className == "modify") {
@@ -118,13 +125,15 @@
             }
         });
 
+        //更新本地数据
         function updateLS() {
+            //获取数据所在元素
             const notesText = document.querySelectorAll('textarea')
-
+            //新建数组
             const notes = []
-
+            //给数组添加数据
             notesText.forEach(note => notes.push(note.value))
-
+            //把数组保存在本地
             localStorage.setItem('notes', JSON.stringify(notes))
         }
     </script>
