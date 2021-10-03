@@ -68,7 +68,6 @@
             <img src="https://i2.kurocore.com/img-master/img/2015/05/27/00/01/31/50577795_p0_master1200.jpg" alt="">
             <img src="https://i2.kurocore.com/img-master/img/2019/04/20/00/00/05/74279771_p0_master1200.jpg" alt="">
         </ul>
-
     </section>
     <button class="pre"></button>
     <button class="next"></button>
@@ -78,7 +77,9 @@
         const imgnum = ul.childElementCount;
 
         let index = 0;
+        let auto = setInterval(next, 2500);
 
+        //切换到上一张 点击时清除定时器
         btns[0].addEventListener('click', function () {
             clearInterval(auto);
             index--;
@@ -86,24 +87,26 @@
             ul.style.transform = 'translateX(' + -400 * index + 'px)'
         })
 
+        //切换到下一张
         function next() {
             index++;
             if (index == imgnum) index = 0;
             ul.style.transform = 'translateX(' + -400 * index + 'px)'
         }
 
+        //调用next 点击时清除定时器
         btns[1].addEventListener('click', function () {
             clearInterval(auto);
             next();
         })
 
+        //点击结束后开启定时器
         ul.addEventListener('transitionend', function () {
             clearInterval(auto);
 
             auto = setInterval(next, 2500);
         })
 
-        let auto = setInterval(next, 2500);
 
 
     </script>

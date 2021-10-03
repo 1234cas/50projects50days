@@ -1,0 +1,17 @@
+没有设置border-style: solid;会导致左右按钮显示不同的颜色 
+轮播图 div>ul>img div是显示的窗口 通过改变ul的transform来更换图片
+
+这个的写法也要学下来 他把设置定时器和改变图片都封装成了函数 点击调用即可 看起来条理清晰
+
+轮播图的判断可以封装成一个函数 图片切换是同一个代码 只是条件不一样 封装的时候处理条件即可
+function changeImage() {
+    if(idx > img.length - 1) {
+        idx = 0
+    } else if(idx < 0) {
+        idx = img.length - 1
+    }
+
+    imgs.style.transform = `translateX(${-idx * 500}px)`
+}
+    let auto = setInterval(next, 2500);
+    再次赋值时不用声明  auto = setInterval(next, 2500);
