@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.11/tailwind.min.css"
+        integrity="sha512-KO1h5ynYuqsFuEicc7DmOQc+S9m2xiCKYlC3zcZCSEw0RGDsxcMnppRaMZnb0DdzTDPaW22ID/gAGCZ9i+RT/w=="
+        crossorigin="anonymous" />
     <title>Document</title>
     <style>
         * {
@@ -32,6 +35,7 @@
             background: url(https://i2.kurocore.com/img-master/img/2015/03/19/19/59/46/49361111_p0_master1200.jpg) no-repeat center/cover;
             z-index: -1;
             transition: all .5s;
+
         }
 
         form {
@@ -40,14 +44,14 @@
             justify-content: center;
             background-color: white;
             border-radius: 5px;
-            padding: 40px;
-
+            padding: 20px 40px;
         }
 
         input {
             height: 30px;
             margin: 10px 0;
             border: 1px solid #e2e8f0;
+            padding: 5px;
         }
 
         input::placeholder {
@@ -56,9 +60,10 @@
 
         h3 {
             margin: 20px;
+            font-size: 1.875rem;
         }
 
-        input[type="submit"] {
+        input[type=submit] {
             color: white;
             background: black;
         }
@@ -72,7 +77,7 @@
         <label for="name">用户名:</label>
         <input type="text" id="name" placeholder="输入用户名">
         <label for="pwd">密码:</label>
-        <input type="text" id="pwd" placeholder="输入密码">
+        <input type="text" id="pwd" placeholder="输入密码" autocomplete="off">
         <input type="submit">
     </form>
 

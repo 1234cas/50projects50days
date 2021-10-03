@@ -1,0 +1,4 @@
+bg.style.filter = 'blur(' + realb + 'px)';
+background.style.filter = `blur(${blurValue}px)`
+表单很多都是被内容撑大的 不是设置固定宽高
+input[type=submit]
