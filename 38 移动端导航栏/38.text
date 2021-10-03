@@ -1,0 +1,18 @@
+        排他
+        lis.forEach((li, index) => {
+            li.addEventListener('click', function () {
+                hiddenAllContents();
+                hiddenAllLis();
+
+                contents[index].classList.add('show');
+                li.classList.add('active');
+            })
+        })
+        function hiddenAllContents() {
+            contents.forEach(content => content.classList.remove('show'))
+        }
+        function hiddenAllLis() {
+            lis.forEach(li => li.classList.remove('active'))
+        }
+
+        显示切换很多是opacity和visibility还有transition
