@@ -96,10 +96,12 @@
                 btn.classList.toggle('active');
 
                 let check = 1;
+                //检查按钮有几个激活
                 for (let i = 0; i < btns.length; i++) {
                     if (btns[i].classList.contains('active')) check++;
                 }
 
+                //大于两个时 根据当前按钮的索引把上一个按钮关闭
                 if (check > btns.length) {
                     index--;
                     if (index < 0) index = btns.length - 1;

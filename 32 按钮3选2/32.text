@@ -1,0 +1,1 @@
+他做法是把input隐藏起来 然后通过label绑定到input label做成按钮的样式 这样子就可以在在js中通过checked很方便的判断按钮的开关 
