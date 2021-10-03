@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: content-box;
+        }
+
+        body {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #111111;
+        }
+
+        .box {
+            display: grid;
+            width: 400px;
+            height: 500px;
+            justify-content: center;
+            align-content: center;
+            gap: 4px;
+            grid-template-columns: repeat(20, 16px);
+            grid-template-rows: repeat(25, 16px);
+            margin-top: 20px;
+        }
+
+        span {
+            display: inline-block;
+            background-color: #1D1D1D;
+            transition: all 1s;
+        }
+
+        /* 不需要淡入 */
+        span:hover {
+            transition-duration: 0s;
+        }
+
+        button {
+            padding: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="btns">
+        <button>纯色</button>
+        <button>多色</button>
+        <button>不消失</button>
+    </div>
+    <div class="box">
+    </div>
+    <script>
+        const spans = document.querySelectorAll('span');
+        const box = document.querySelector('.box');
+        const btns = document.querySelectorAll('button');
+
+        let colorarr = ['#e74c3c', '#8e44ad', '#3498db', '#e67e22', '#2ecc71']
+        let del = true;
+
+        //动态生成500span
+        const SQUARES = 500
+        for (let i = 0; i < SQUARES; i++) {
+            const square = document.createElement('span')
+
+            // square.addEventListener('mouseover', () => setColor(square))
+
+            // square.addEventListener('mouseout', () => removeColor(square))
+
+            box.appendChild(square)
+        }
+        //设置颜色和是否会消失
+        btns[0].addEventListener('click', function () {
+            colorarr = ['blue'];
+        })
+        btns[1].addEventListener('click', function () {
+            colorarr = ['#e74c3c', '#8e44ad', '#3498db', '#e67e22', '#2ecc71']
+        })
+        btns[2].addEventListener('click', function () {
+            if (del == true) del = false;
+            else del = true;
+        })
+
+        //在大盒子里面移动的时候就会触发背景色
+        box.addEventListener('mousemove', addColor)
+
+        //事件委托 也可以写成两个函数 然后在添加的时候就绑定
+        function addColor(e) {
+            //把下面这行去掉有惊喜
+            if (e.target && e.target.nodeName == 'SPAN') {
+                const color = colorarr[Math.floor(Math.random() * colorarr.length)]
+                e.target.style.backgroundColor = color
+                //下面这两个注释解开会给经过的span添加boxshadow 边框会有种模糊淡化的感觉
+                e.target.style.boxShadow = `0 0 2px ${color}, 0 0 10px ${color}`
+                if (del == true) {
+                    setTimeout(function () {
+                        e.target.style.backgroundColor = '#1D1D1D'
+                        e.target.style.boxShadow = '0 0 2px #000'
+                    }, 1000)
+                }
+            }
+        }
+
+        //停止和开启上色
+        box.addEventListener('click', function (e) {
+            box.removeEventListener('mousemove', addColor);
+        })
+        box.addEventListener('dblclick', function (e) {
+            box.addEventListener('mousemove', addColor);
+        })
+    </script>
+</body>
+
+</html>
