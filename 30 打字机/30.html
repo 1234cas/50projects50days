@@ -57,6 +57,7 @@
         let typer = ''
         let i = 0;
 
+        //输入改变时删除定时器改变速度并开启新速度的定时器
         input.addEventListener('change', function () {
             let speed = 1200 / (input.value - 0);
             window.clearInterval(typer)
@@ -64,6 +65,7 @@
         })
         typewriter();
 
+        //打字机效果
         function typewriter(speed = 400) {
             typer = setInterval(function () {
                 p.innerHTML = content.substr(0, i);
