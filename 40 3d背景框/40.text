@@ -1,0 +1,9 @@
+平行四边形写法 用来做立体感
+            position: absolute;
+            top: 200px;
+            right: -5px;
+            width: 200px;
+            height: 10px;
+            background-color: #CF84A2;
+            content: '';
+            transform: skewX(45deg);

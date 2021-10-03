@@ -75,11 +75,11 @@
         .after {
             box-shadow: none;
             margin: 0;
+            transform: rotatez(360deg);
             /* 这个也是一个效果 */
             /* transform: rotate3d(1080deg); */
             /* transform: rotatey(1080deg); */
             /* transform: rotatex(1080deg); */
-            transform: rotatez(360deg);
         }
 
         button {
@@ -96,6 +96,7 @@
         const box = document.querySelector('.box')
         const btn = document.querySelector('button');
 
+        //绑定点击事件 切换类
         btn.addEventListener('click', function () {
             box.childNodes.forEach(part => {
                 part.classList.toggle('after')
@@ -103,6 +104,8 @@
         })
 
         separate()
+
+        //动态创建盒子 并把图片分割成n等分赋给盒子背景
         function separate() {
             for (let i = 0; i < 4; i++) {
                 for (let j = 0; j < 6; j++) {
@@ -112,7 +115,6 @@
                     box.appendChild(div);
                 }
             }
-
         }
     </script>
 </body>
