@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            visibility: hidden;
+            height: 100vh;
+            width: 30vw;
+            transform: translateX(-30vw);
+            transition: all .3s;
+            z-index: 2;
+        }
+
+
+        nav.active {
+            visibility: visible;
+            background-color: white;
+            transform: translateX(0vw);
+            transition: all .3s .6s;
+        }
+
+
+        button {
+            width: 100px;
+            height: 100px;
+            background-color: steelblue;
+        }
+
+        .on {
+            padding: 20px;
+            font-size: 25px;
+        }
+
+        .off {
+            float: right;
+        }
+
+        h1 {
+            margin: 30px;
+        }
+
+        li {
+            list-style: none;
+            margin: 20px;
+            color: steelblue;
+        }
+
+        .navbg1,
+        .navbg2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 0;
+            background-color: tomato;
+            transition: all .3s .6s;
+        }
+
+        .navbg2 {
+            background-color: teal;
+            transition: all .3s .3s;
+        }
+
+        nav.active~.navbg1,
+        nav.active~.navbg2 {
+            width: calc(30vw + 60px);
+            transition: all .3s;
+        }
+
+        nav.active~.navbg2 {
+            width: calc(30vw + 30px);
+            transition: all .3s .3s;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <h1><img src="" alt="logo"><i class="fas fa-times off"></i></h1>
+        <ul>
+            <li>TEAMS</li>
+            <li>LOCATIONS </li>
+            <li>LIFE AT NETFLIX
+                <ul>
+                    <li>NETFLIX CULTURE MEMO</li>
+                    <li> WORK LIFE BALANCE</li>
+                    <li> INCLUSION & DIVERSITY</li>
+                    <li> BLOG</li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <i class="fas fa-align-justify on"></i>
+    <div class="navbg1"></div>
+    <div class="navbg2"></div>
+    <script>
+        const on = document.querySelector('.on');
+        const off = document.querySelector('.off');
+        const nav = document.querySelector('nav')
+
+        //显示隐藏切换
+        on.addEventListener('click', function () {
+            nav.classList.add('active');
+        })
+        off.addEventListener('click', function () {
+            nav.classList.remove('active');
+        })
+    </script>
+    <script src="https://kit.fontawesome.com/5c84924eaa.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

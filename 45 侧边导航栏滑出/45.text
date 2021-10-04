@@ -1,0 +1,5 @@
+取巧解决了 因为加了fixed的nav无法显示在最上层 可能是因为after和before都是他孩子的原因
+然后我就改变了显示的先后顺序 达到了效果
+上面的做法还是失败了 因为没办法控制nav里面文字的显示
+如果控制width:0到width:30vw里面的内容会变化 感觉用户观感不是很好
+所以  transform: translateX(-30vw);  transform: translateX(0vw);直接从右侧滑出 就不会改变width
