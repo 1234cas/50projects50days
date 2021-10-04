@@ -1,0 +1,16 @@
+页面刷新不会刷到最上面 有时候可以 很诡异 原项目也有这个bug
+
+scrollTop设置也不生效 .... 大疑问
+
+阻止用户刷新
+window.addEventListener('beforeunload', function (e) {
+    // 如果是监听就一定要加下面4行 如果是on可以不加
+    e = e || window.event;
+    if (e) {
+        e.returnValue = "关闭提示"
+    }
+    // .... 执行自定义逻辑
+    // Chrome, Safari, Firefox 4+, Opera 12+ , IE 9+
+    return "关闭提示?"
+})
+

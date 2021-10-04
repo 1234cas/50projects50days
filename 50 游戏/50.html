@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100vw;
+            overflow: hidden;
+            font-family: 'Press Start 2P', sans-serif;
+            font-size: 20px;
+        }
+
+        section {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: all .4s;
+        }
+
+        section>* {
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .up {
+            margin-top: -100vh;
+        }
+
+        button {
+            font-family: 'Press Start 2P', sans-serif;
+        }
+
+        i {
+            font-size: 100px;
+            display: inline-block;
+        }
+
+        .playcanvas {
+            position: relative;
+            display: block;
+            width: 100vw;
+        }
+
+        .playcanvas i {
+            position: absolute;
+            transition: all .3s;
+        }
+
+        .score,
+        .time {
+            user-select: none;
+            float: right;
+        }
+
+        .time {
+            float: left;
+        }
+
+        i.remove i {
+            transform: scale(0);
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <h1>Catch The Dargen</h1>
+        <button>play</button>
+    </section>
+    <section>
+        <div>Choose Folder Icon</div>
+        <div class="choose">
+            <i class="fas fa-dragon"></i>
+            <i class="fab fa-d-and-d"></i>
+        </div>
+    </section>
+    <section class="playcanvas">
+        <div class="time">Time:00:00</div>
+        <div class="score">Score:0</div>
+    </section>
+
+    <script>
+        const play = document.querySelector('button')
+        const choose = document.querySelector('.choose')
+        const screens = document.querySelectorAll('section');
+        const playcanvas = document.querySelector('.playcanvas')
+        const timer = document.querySelector('.time')
+        const scorebox = document.querySelector('.score')
+
+        let icon = '';
+        let sectime = 0;
+        let score = 0;
+
+        //开始进入游戏
+        play.addEventListener('click', function () {
+            // document.body.style.transform = 'translateY(-100vh)'
+            screens[0].classList.add('up');
+        })
+
+        //选择图案
+        choose.addEventListener('click', function (e) {
+            if (e.target == this.firstElementChild) {
+                icon = '<i class="fas fa-dragon"></i>'
+                screens[1].classList.add('up');
+                game()
+            } else if (e.target == this.lastElementChild) {
+                icon = '<i class="fab fa-d-and-d"></i>'
+                screens[1].classList.add('up');
+                game()
+            }
+        })
+
+        //封装游戏的函数
+        function game() {
+            function createDargen() {
+                //随机生成位置
+                const dargen = document.createElement('i');
+                dargen.innerHTML = icon;
+                dargen.style.transform = 'rotate(' + Math.ceil(Math.random() * 360) + 'deg)'
+                dargen.style.top = Math.ceil(Math.random() * 60 + 20) + '%'
+                dargen.style.left = Math.ceil(Math.random() * 60 + 20) + '%'
+
+                //点击消失
+                dargen.addEventListener('click', function () {
+                    score++;
+                    scorebox.innerHTML = 'Scroe:' + score;
+
+                    dargen.classList.add('remove');
+                    setTimeout(function () {
+                        dargen.remove();
+                    }, 300)
+                    for (let i = 0; i < 2; i++) {
+                        createDargen();
+                    }
+                })
+
+                playcanvas.appendChild(dargen);
+            }
+
+            //左上角计时器
+            setInterval(function () {
+                //用取模和取余就不用做判断
+                let m = Math.floor(sectime / 60)
+                let s = sectime % 60
+                // if (sectime > 60) {
+                //     mintime++;
+                //     sectime = 0;
+                // }
+
+                //在模板字符串中直接写三元
+                timer.innerHTML = `Time:${m > 10 ? m : '0' + m}:${s > 10 ? s : '0' + s}`;
+                // sectime = sectime > 10 ? sectime : '0' + sectime;
+                // mintime = mintime > 10 ? mintime : '0' + mintime;
+                // timer.innerHTML = 'Time:' + mintime + ':' + sectime;
+
+                sectime++;
+            }, 1000)
+
+            createDargen();
+        }
+
+        //阻止用户刷新
+        // window.onbeforeunload = function (e) {
+        //     e = e || window.event;
+        //     if (e) {
+        //         e.returnValue = "关闭提示"
+        //     }
+        //     // .... 执行自定义逻辑
+        //     // Chrome, Safari, Firefox 4+, Opera 12+ , IE 9+
+        //     return "关闭提示?"
+        // }
+        // window.addEventListener('beforeunload', function (e) {
+        //     e = e || window.event;
+        //     if (e) {
+        //         e.returnValue = "关闭提示"
+        //     }
+        //     // .... 执行自定义逻辑
+        //     // Chrome, Safari, Firefox 4+, Opera 12+ , IE 9+
+        //     return "关闭提示?"
+        // })
+    </script>
+    <script src="https://kit.fontawesome.com/5c84924eaa.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
