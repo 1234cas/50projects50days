@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: content-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            background: wheat;
+
+        }
+
+        .box {
+            width: 1000px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bar {
+            position: relative;
+            width: 500px;
+            height: 20px;
+            background: rgb(255, 180, 192);
+            border-radius: 10px;
+            cursor: pointer;
+
+        }
+
+        .circle,
+        .per {
+            position: absolute;
+            left: 0;
+            transform: translateX(-50%);
+        }
+
+        .circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: tomato;
+            top: -5px;
+            cursor: pointer;
+        }
+
+        .per {
+            width: 50px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background: white;
+            top: -40px;
+            font-size: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.65);
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="bar">
+            <div class="circle"></div>
+            <p class="per">0</p>
+        </div>
+
+    </div>
+    <script>
+        const per = document.querySelector('.per');
+        const circle = document.querySelector('.circle');
+        const bar = document.querySelector('.bar');
+
+        let x = 0
+        let boxx = 0
+        let left = 0
+
+        bar.addEventListener('click', function (e) {
+            move(e)
+        })
+
+        circle.addEventListener('mousedown', function (e) {
+            document.addEventListener('mousemove', move)
+            document.addEventListener('mouseup', function (e) {
+                document.removeEventListener('mousemove', move)
+            })
+        })
+
+        function move(e) {
+            x = e.clientX;
+            boxx = bar.offsetLeft;
+            left = x - boxx;
+
+            left < 0 ? left = 0 : left;
+            left > bar.clientWidth ? left = bar.clientWidth : left;
+            circle.style.left = left + 'px';
+            follow()
+            // document.body.style.cursor = 'pointer'
+        }
+
+        function follow() {
+            per.style.left = `${left}px`
+            per.innerHTML = Math.ceil(left / bar.clientWidth * 100)
+        }
+    </script>
+</body>
+
+</html>

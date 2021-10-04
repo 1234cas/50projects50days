@@ -1,0 +1,3 @@
+他的做法是用range类型的input 直接做滑块 然后只要控制label的left
+addEventListen('click',move);
+有些时候调用函数不用加括号 比如监听和定时器
