@@ -10,8 +10,6 @@
         body {
             width: 100vw;
             height: 100vh;
-            /* background: url(https://api.vvhan.com/api/acgimg) no-repeat center/cover; */
-            /* color: white; */
             overflow: hidden;
         }
 
@@ -92,16 +90,13 @@
         const body = document.body
         const imgbox = document.querySelector('div');
 
-
         btn3.addEventListener('click', function () {
             let random = Math.floor(Math.random() * 600);
             let img = document.createElement('img');
             img.src = 'https://cdn.jsdelivr.net/gh/uxiaohan/GitImgTypecho/Acg/api.vvhan.com[' + random + '].jpg';
-            // if (imgbox.firstChild) imgbox.removeChild(imgbox.firstChild);
             imgbox.removeChild(imgbox.firstChild);
             imgbox.appendChild(img);
-            //切换不了body的背景
-            // body.style.background = 'https://cdn.jsdelivr.net/gh/uxiaohan/GitImgTypecho/Acg/api.vvhan.com[' + random + '].jpg ';
+            body.style.background = 'url(https://cdn.jsdelivr.net/gh/uxiaohan/GitImgTypecho/Acg/api.vvhan.com[' + random + '].jpg) no-repeat center/cover ';
         })
     </script>
 </body>
