@@ -1,0 +1,3 @@
+<button onclick="location.reload()">再来一次</button>
+    e.preventDefault();可以阻止submit的默认刷新行为
+    (li>input[type=radio]+label)*4

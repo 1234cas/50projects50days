@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap');
+
+        * {
+            padding: 0;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #E5EAF2;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+
+        form {
+            width: 600px;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .quiz-header {
+            padding: 4rem;
+        }
+
+        h2 {
+            padding: 1rem;
+            text-align: center;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+        }
+
+        ul li label {
+            cursor: pointer;
+        }
+
+        button {
+            background-color: #8e44ad;
+            color: #fff;
+            border: none;
+            display: block;
+            width: 100%;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-family: inherit;
+            padding: 1.3rem;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="">
+        <div class="quiz-header">
+            <h2></h2>
+            <!-- (li>input[type=radio]+label)*4 -->
+            <ul>
+                <li><input type="radio" id="a" name="answer"><label for="a"></label></li>
+                <li><input type="radio" id="b" name="answer"><label for="b"></label></li>
+                <li><input type="radio" id="c" name="answer"><label for="c"></label></li>
+                <li><input type="radio" id="d" name="answer"><label for="d"></label></li>
+            </ul>
+        </div>
+        <button class="submit">提交</button>
+    </form>
+
+    <script src="https://kit.fontawesome.com/5c84924eaa.js" crossorigin="anonymous"></script>
+    <script>
+        const quizData = [{
+            question: "Which language runs in a web browser?",
+            a: "Java",
+            b: "C",
+            c: "Python",
+            d: "Javascript",
+            correct: "d",
+        },
+        {
+            question: "What does CSS stand for?",
+            a: "Central Style Sheets",
+            b: "Cascading Style Sheets",
+            c: "Cascading Simple Sheets",
+            d: "Cars SUVs Sailboats",
+            correct: "b",
+        },
+        {
+            question: "What does HTML stand for?",
+            a: "Hypertext Markup Language",
+            b: "Hypertext Markdown Language",
+            c: "Hyperloop Machine Language",
+            d: "Helicopters Terminals Motorboats Lamborginis",
+            correct: "a",
+        },
+        {
+            question: "What year was JavaScript launched?",
+            a: "1996",
+            b: "1995",
+            c: "1994",
+            d: "none of the above",
+            correct: "b",
+        }]
+        const form = document.querySelector('form')
+        const h2 = document.querySelector('h2');
+        const radios = document.querySelectorAll('input[type=radio]');
+        const labels = document.querySelectorAll('label');
+        const submit = document.querySelector('.submit')
+        let score = 0
+        let round = 0;
+        const arr = ['a', 'b', 'c', 'd']
+
+        load();
+
+        //页面内容的加载
+        function load() {
+            let currentQuizData = quizData[round]
+            h2.innerText = currentQuizData.question;
+            labels[0].innerText = currentQuizData.a
+            labels[1].innerText = currentQuizData.b
+            labels[2].innerText = currentQuizData.c
+            labels[3].innerText = currentQuizData.d
+        }
+
+        //获取选择的答案 同时也可以用来检验用户是否选择了
+        function getSelected() {
+            let select = null;
+            //如果有checked的就返回索引
+            radios.forEach((radio, index) => {
+                if (radio.checked) {
+                    select = index;
+                }
+            })
+            return select;
+        }
+
+        //提交按钮
+        submit.addEventListener('click', function (e) {
+            //阻止默认刷新行为
+            e.preventDefault();
+            //检验是否选择
+            if (!getSelected()) return false;
+            //统计分数
+            if (quizData[round].correct === arr[getSelected()]) {
+                score++;
+            }
+            //题目的索引加1
+            round++;
+            //没完成就清空选项 重新加载 完成就加载成绩页面
+            if (round < quizData.length) {
+                radios.forEach(radio => { radio.checked = false })
+                load();
+            } else {
+                form.innerHTML = `
+                <h2>恭喜你 总共对了${score}/${quizData.length}题</h2>
+                <button onclick="location.reload()">再来一次</button>
+                `
+            }
+        })
+    </script>
+</body>
+
+</html>
