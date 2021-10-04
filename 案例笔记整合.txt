@@ -137,6 +137,14 @@ textarea的margin不生效是因为他是行内元素
 好像是因为%无法被识别为数字
 //line-height要改成lineHeight 不是line_height
 
+17
+async function getMovies(url) {
+    const res = await fetch(url)
+    const data = await res.json()
+    showMovies(data.results)
+}
+研究一下fetch的用法
+
 18
      调整img标签的位置        
     object-fit: none;
@@ -254,6 +262,16 @@ pageYOffset 和 scrollY都能返回视窗滚动过的距离 都是window对象�
 /* 如果不设flex 新产生的消息会影响之前消息的盒子大小 这是为什么 */
 
 28
+    repos
+    .slice(0, 5)
+    .forEach(repo => {
+        const repoEl = document.createElement('a')
+        repoEl.classList.add('repo')
+        repoEl.href = repo.html_url
+        repoEl.target = '_blank'
+        repoEl.innerText = repo.name    
+        reposEl.appendChild(repoEl)
+    })
 
 29
 双击的写法
@@ -292,3 +310,324 @@ loveMe.addEventListener('click', (e) => {
 
 substr(i, 1)
 join('')
+
+31
+
+
+32
+他做法是把input隐藏起来 然后通过label绑定到input label做成按钮的样式 这样子就可以在在js中通过checked很方便的判断按钮的开关 
+
+33
+这个的js写法可以学下来
+他只用了两个函数 一个生成note 一个更新数据 一系列点击事件在note添加的时候就绑定了
+不用像我用事件委托的方式 太零散
+
+他的textarea下面还有一个div用来显示内容 当点编辑的时候textarea会隐藏 div会显示 这样子就实现了取消编辑的效果
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.2.2/marked.min.js"></script>
+    marked()
+
+34
+{
+    animationend事件 e.animationName
+    事件对象event
+    隐藏display：none或者opacity:0或者scale(0)
+    
+    .counter {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    
+    .counter.hide {
+      transform: translate(-50%, -50%) scale(0);
+      animation: hide 0.2s ease-out;
+    }
+    
+    @keyframes hide {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+    
+      100% {
+        transform: translate(-50%, -50%) scale(0);
+      }
+    }
+    
+    .final {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      text-align: center;
+    }
+    
+    .final.show {
+      transform: translate(-50%, -50%) scale(1);
+      animation: show 0.2s ease-out;
+    }
+    
+    @keyframes show {
+      0% {
+        transform: translate(-50%, -50%) scale(0);
+      }
+    
+      30% {
+        transform: translate(-50%, -50%) scale(1.4);
+      }
+    
+      100% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+    
+    .nums {
+      color: #3498db;
+      font-size: 50px;
+      position: relative;
+      overflow: hidden;
+      width: 250px;
+      height: 50px;
+    }
+    
+    .nums span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(120deg);
+      transform-origin: bottom center;
+    }
+    
+    .nums span.in {
+      transform: translate(-50%, -50%) rotate(0deg);
+      animation: goIn 0.5s ease-in-out;
+    }
+    
+    .nums span.out {
+      animation: goOut 0.5s ease-in-out;
+    }
+    
+    @keyframes goIn {
+      0% {
+        transform: translate(-50%, -50%) rotate(120deg);
+      }
+    
+      30% {
+        transform: translate(-50%, -50%) rotate(-20deg);
+      }
+    
+      60% {
+        transform: translate(-50%, -50%) rotate(10deg);
+      }
+    
+      100% {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+    }
+    
+    @keyframes goOut {
+      0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+    
+      60% {
+        transform: translate(-50%, -50%) rotate(20deg);
+      }
+    
+      100% {
+        transform: translate(-50%, -50%) rotate(-120deg);
+      }
+    }
+    }
+
+35
+没有设置border-style: solid;会导致左右按钮显示不同的颜色 
+轮播图 div>ul>img div是显示的窗口 通过改变ul的transform来更换图片
+
+这个的写法也要学下来 他把设置定时器和改变图片都封装成了函数 点击调用即可 看起来条理清晰
+
+轮播图的判断可以封装成一个函数 图片切换是同一个代码 只是条件不一样 封装的时候处理条件即可
+function changeImage() {
+    if(idx > img.length - 1) {
+        idx = 0
+    } else if(idx < 0) {
+        idx = img.length - 1
+    }
+
+    imgs.style.transform = `translateX(${-idx * 500}px)`
+}
+    let auto = setInterval(next, 2500);
+    再次赋值时不用声明  auto = setInterval(next, 2500);
+
+36
+       grid布局
+        .box {
+            display: grid;
+            width: 400px;
+            height: 500px;
+            justify-content: center;
+            align-content: center;
+            gap: 4px;
+            grid-template-columns: repeat(20, 16px);
+            grid-template-rows: repeat(25, 16px);
+            margin-top: 20px;
+        }
+
+        用一个if(true)来控制settimeout 然后通过点击来控制true的值
+
+        //下面这两个注释解开会给经过的span添加boxshadow 边框会有种模糊淡化的感觉
+        // e.target.style.boxShadow = `0 0 2px ${color}, 0 0 10px ${color}`
+        // e.target.style.boxShadow = '0 0 2px #000'
+        
+        取消淡入
+        span:hover {
+            transition-duration: 0s;
+        }
+
+37
+Object.keys(colors)
+padStart() padEnd() 自动补全
+
+38
+        排他
+        lis.forEach((li, index) => {
+            li.addEventListener('click', function () {
+                hiddenAllContents();
+                hiddenAllLis();
+
+                contents[index].classList.add('show');
+                li.classList.add('active');
+            })
+        })
+        function hiddenAllContents() {
+            contents.forEach(content => content.classList.remove('show'))
+        }
+        function hiddenAllLis() {
+            lis.forEach(li => li.classList.remove('active'))
+        }
+
+        显示切换很多是opacity和visibility还有transition
+
+39
+bg.style.filter = 'blur(' + realb + 'px)';
+background.style.filter = `blur(${blurValue}px)`
+表单很多都是被内容撑大的 不是设置固定宽高
+input[type=submit]
+
+40
+平行四边形写法 用来做立体感
+            position: absolute;
+            top: 200px;
+            right: -5px;
+            width: 200px;
+            height: 10px;
+            background-color: #CF84A2;
+            content: '';
+            transform: skewX(45deg);
+
+41
+空格的e.key是' '
+e.preventDefault();可以阻止keydown的默认行为 就是不给打字
+let notice = ''
+clearTimeout(notice)
+notice = setTimeout(() => {
+    info.classList.remove('error');
+    info.innerHTML = `'This is design only. We didn't actually send you an email as we don't have your email, right?'`
+}, 1000)
+
+42
+ results.forEach(user => {
+    const li = document.createElement('li')
+    
+    //把用户的数据存储在数组中方便查询使用
+    listItems.push(li)
+
+    li.innerHTML = `
+    <img src="${user.picture.large}" alt="${user.name.first}">
+    <div class="user-info">
+        <h4>${user.name.first} ${user.name.last}</h4>
+        <p>${user.location.city}, ${user.location.country}</p>
+    </div>
+    `
+    result.appendChild(li)
+})
+先push再赋值也是可以的 但是这是为什么 小疑问
+
+44
+他的做法是用range类型的input 直接做滑块 然后只要控制label的left
+addEventListen('click',move);
+有些时候调用函数不用加括号 比如监听和定时器
+
+45
+取巧解决了 因为加了fixed的nav无法显示在最上层 可能是因为after和before都是他孩子的原因
+然后我就改变了显示的先后顺序 达到了效果
+上面的做法还是失败了 因为没办法控制nav里面文字的显示
+如果控制width:0到width:30vw里面的内容会变化 感觉用户观感不是很好
+所以  transform: translateX(-30vw);  transform: translateX(0vw);直接从右侧滑出 就不会改变width
+
+46
+<button onclick="location.reload()">再来一次</button>
+    e.preventDefault();可以阻止submit的默认刷新行为
+    (li>input[type=radio]+label)*4
+
+47
+        进度条写法
+        .progress-bar {
+            background-color: #fff;
+            height: 4px;
+            width: 100%;
+            animation: grow 10s linear infinite;
+            transform-origin: left;
+        }
+
+        @keyframes grow {
+            0% {
+                transform: scaleX(0);
+            }
+        }
+
+49
+不设高 设padding撑开盒子 来使得内容居中
+他是在创造的时候同时绑定事件 我的是事件为委托
+存取本地数据
+const todos = JSON.parse(localStorage.getItem('todos'))
+contextmenu菜单键事件
+
+if(todos) {
+    todos.forEach(todo => addTodo(todo))
+}
+
+function updateLS() {
+    todosEl = document.querySelectorAll('li')
+
+    const todos = []
+
+    todosEl.forEach(todoEl => {
+        todos.push({
+            text: todoEl.innerText,
+            completed: todoEl.classList.contains('completed')
+        })
+    })
+
+    localStorage.setItem('todos', JSON.stringify(todos))
+}
+
+50
+页面刷新不会刷到最上面 有时候可以 很诡异 原项目也有这个bug
+
+scrollTop设置也不生效 .... 大疑问
+
+阻止用户刷新
+window.addEventListener('beforeunload', function (e) {
+    // 如果是监听就一定要加下面4行 如果是on可以不加
+    e = e || window.event;
+    if (e) {
+        e.returnValue = "关闭提示"
+    }
+    // .... 执行自定义逻辑
+    // Chrome, Safari, Firefox 4+, Opera 12+ , IE 9+
+    return "关闭提示?"
+})
+
