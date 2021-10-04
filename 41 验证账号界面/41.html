@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: content-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            background-color: #FBFCFE;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            height: 40%;
+            border: 2px solid black;
+            border-radius: 8px;
+            text-align: center;
+            background-color: white;
+            padding: 10px;
+        }
+
+        input {
+            width: 100px;
+            height: 120px;
+            font-size: 75px;
+            text-align: center;
+            border-radius: 4px;
+            border: 1px solid
+        }
+
+        input:valid {
+            border: 1px solid skyblue;
+            box-shadow: 0px 5px 10px -5px black;
+        }
+
+        small {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="">
+        <h2>验证您的帐户</h2>
+        <p>输入下面验证码以确认您的身份</p>
+        <section>
+            <input type="text" maxlength="1" required>
+            <input type="text" maxlength="1" required>
+            <input type="text" maxlength="1" required>
+            <input type="text" maxlength="1" required>
+            <input type="text" maxlength="1" required>
+            <input type="text" maxlength="1" required>
+
+        </section>
+        <small>&nbsp;</small>
+    </form>
+    <script>
+        const inputs = document.querySelectorAll('input');
+        const small = document.querySelector('small')
+
+        //每次键盘按下 就先清空内容 然后再延时聚焦下一个
+        inputs.forEach((input, index) => {
+            input.addEventListener('keydown', function (e) {
+                if (e.key >= 0 && e.key <= 9) {
+                    inputs[index].value = ''
+                    if (index < inputs.length - 1) setTimeout(() => inputs[index + 1].focus(), 10)
+                } else {
+                    //不是数字话 要阻止他显示在页面 用e.preventDefault()
+                    e.preventDefault()
+                    small.innerHTML = '只能输入数字!'
+                    setTimeout(function () {
+                        small.innerHTML = '&nbsp;'
+                    }, 2000)
+                }
+            })
+        })
+
+        // inputs.forEach((input, index) => {
+        //     input.addEventListener('input', function () {
+        //         if (index < inputs.length - 1) inputs[index + 1].focus()
+        //     })
+        // })
+    </script>
+</body>
+
+</html>

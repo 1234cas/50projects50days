@@ -1,0 +1,8 @@
+空格的e.key是' '
+e.preventDefault();可以阻止keydown的默认行为 就是不给打字
+let notice = ''
+clearTimeout(notice)
+notice = setTimeout(() => {
+    info.classList.remove('error');
+    info.innerHTML = `'This is design only. We didn't actually send you an email as we don't have your email, right?'`
+}, 1000)
