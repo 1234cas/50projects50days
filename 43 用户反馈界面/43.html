@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: content-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: tomato;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .box {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            width: 600px;
+            height: 400px;
+            background: white;
+            box-shadow: 0 0 10px 2px black;
+        }
+
+        .emojis {
+            width: 80%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .emoji {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            padding: 40px 20px 20px 20px;
+        }
+
+        .active {
+            box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+        }
+
+        img {
+            width: 50px;
+            height: 50px;
+        }
+
+        button {
+            width: 100px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h3>给我们的服务评价</h3>
+        <div class="emojis">
+            <div class="emoji">
+                <img src="https://image.flaticon.com/icons/svg/187/187150.svg" alt="">
+                <div>不行</div>
+            </div>
+            <div class="emoji">
+                <img src="https://image.flaticon.com/icons/svg/187/187136.svg" alt="">
+                <div>一般</div>
+            </div>
+            <div class="emoji active">
+                <img src="https://image.flaticon.com/icons/svg/187/187133.svg" alt="">
+                <div>不错</div>
+            </div>
+        </div>
+        <button>发送</button>
+    </div>
+
+    <script>
+        const emojis = document.querySelectorAll('.emoji')
+        const btn = document.querySelector('button')
+        const box = document.querySelector('.box')
+
+        let feedback = '不错'
+
+        //排他添加选中的效果
+        emojis.forEach(emoji => {
+            emoji.addEventListener('click', function () {
+                hiddenBoxShadow();
+
+                emoji.classList.add('active')
+                feedback = emoji.lastElementChild.innerHTML
+            })
+        })
+
+        //点击切换到反馈成功页面
+        btn.addEventListener('click', function () {
+            box.innerHTML = `
+            <svg id="i-heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <path d="M4 16 C1 12 2 6 7 4 12 2 15 6 16 8 17 6 21 2 26 4 31 6 31 12 28 16 25 20 16 28 16 28 16 28 7 20 4 16 Z" /></svg>
+            <strong>Thank You!</strong>
+            <strong>Feedback: ${feedback} </strong>
+            <p>We'll use your feedback to improve our customer support</p>
+            `
+        })
+
+        //移除所有active类
+        function hiddenBoxShadow() {
+            emojis.forEach(emoji => {
+                emoji.classList.remove('active');
+            })
+        }
+    </script>
+</body>
+
+</html>
