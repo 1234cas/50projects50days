@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f5f5f5;
+        }
+
+        section {
+            width: 400px;
+            box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
+        }
+
+        input,
+        ul>li {
+            width: 100%;
+            height: 60px;
+            padding: 20px 20px;
+            border: 1px solid gray
+        }
+
+        li {
+            list-style: none;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .done {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>todolist</h1>
+    <section>
+        <input type="text" placeholder="Enter your todo" autocomplete="off">
+        <ul>
+        </ul>
+    </section>
+    <script src="https://kit.fontawesome.com/5c84924eaa.js" crossorigin="anonymous"></script>
+    <script>
+        const input = document.querySelector('input');
+        const ul = document.querySelector('ul')
+
+        //读取本地数据
+        const todos = JSON.parse(localStorage.getItem('todos'))
+
+        //有本地数据就渲染数据
+        if (todos) {
+            todos.forEach(todo => {
+                const li = document.createElement('li')
+                li.innerHTML = todo.text;
+                if (todo && todo.completed) {
+                    li.classList.add('done')
+                }
+                ul.appendChild(li);
+            })
+        }
+
+        //enter键添加li
+        input.addEventListener('keydown', function (e) {
+            if (e.keyCode === 13) {
+                if (input.value != '') {
+                    const li = document.createElement('li')
+                    li.innerHTML = input.value;
+                    ul.appendChild(li);
+                    input.value = '';
+                    updateLS()
+                }
+            }
+        })
+
+        //点击切换done类
+        ul.addEventListener('click', function (e) {
+            if (e.target.nodeName.toLowerCase() == 'li') {
+                e.target.classList.toggle('done');
+                updateLS()
+            }
+        })
+
+        //右键删除 contextmenu菜单键
+        ul.addEventListener('contextmenu', function (e) {
+            if (e.target.nodeName.toLowerCase() == 'li') {
+                e.preventDefault();
+                e.target.remove();
+                updateLS()
+            }
+        })
+
+        //更新存储数据
+        function updateLS() {
+            todosEl = document.querySelectorAll('li')
+
+            const todos = []
+
+            todosEl.forEach(todoEl => {
+                todos.push({
+                    text: todoEl.innerText,
+                    completed: todoEl.classList.contains('done')
+                })
+            })
+
+            localStorage.setItem('todos', JSON.stringify(todos))
+        }
+    </script>
+
+</body>
+
+</html>

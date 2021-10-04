@@ -1,0 +1,24 @@
+不设高 设padding撑开盒子 来使得内容居中
+他是在创造的时候同时绑定事件 我的是事件为委托
+存取本地数据
+const todos = JSON.parse(localStorage.getItem('todos'))
+contextmenu菜单键事件
+
+if(todos) {
+    todos.forEach(todo => addTodo(todo))
+}
+
+function updateLS() {
+    todosEl = document.querySelectorAll('li')
+
+    const todos = []
+
+    todosEl.forEach(todoEl => {
+        todos.push({
+            text: todoEl.innerText,
+            completed: todoEl.classList.contains('completed')
+        })
+    })
+
+    localStorage.setItem('todos', JSON.stringify(todos))
+}
