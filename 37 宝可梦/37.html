@@ -2,38 +2,154 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
+        @import url('https://fonts.googleapis.com/css?family=Lato:300,400&display=swap');
+
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: content-box;
+            box-sizing: border-box;
         }
 
-        .boxs {
+        body {
+            background: #efefbb;
+            background: linear-gradient(to right, #d4d3dd, #efefbb);
+            font-family: 'Lato', sans-serif;
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
+            margin: 0;
         }
 
-        .box {
-            width: 100px;
-            height: 250px;
+        h1 {
+            letter-spacing: 3px;
+        }
 
-            background-color: black;
+        .poke-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: space-between;
+            justify-content: center;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        .pokemon {
+            background-color: #eee;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .pokemon .img-container {
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            text-align: center;
+        }
+
+        .pokemon .img-container img {
+            max-width: 90%;
+            margin-top: 20px;
+        }
+
+        .pokemon .info {
+            margin-top: 20px;
+        }
+
+        .pokemon .info .number {
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 0.8em;
+        }
+
+        .pokemon .info .name {
+            margin: 15px 0 7px;
+            letter-spacing: 1px;
         }
     </style>
+    <title>Pokedex</title>
 </head>
 
 <body>
-    <h1>boxs</h1>
-    <div class="boxs">
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-    </div>
+    <h1>Pokedex</h1>
+    <div class="poke-container" id="poke-container"></div>
+
+    <!-- Design inspired by this Dribbble shot: https://dribbble.com/shots/5611109--Pokemon -->
+    <script>
+        const poke_container = document.getElementById('poke-container')
+        const pokemon_count = 150
+        const colors = {
+            fire: '#FDDFDF',
+            grass: '#DEFDE0',
+            electric: '#FCF7DE',
+            water: '#DEF3FD',
+            ground: '#f4e7da',
+            rock: '#d5d5d4',
+            fairy: '#fceaff',
+            poison: '#98d7a5',
+            bug: '#f8d5a3',
+            dragon: '#97b3e6',
+            psychic: '#eaeda1',
+            flying: '#F5F5F5',
+            fighting: '#E6E0D4',
+            normal: '#F5F5F5'
+        }
+
+        const main_types = Object.keys(colors)
+
+        //封装循环调用获得数据的函数
+        const fetchPokemons = async () => {
+            for (let i = 1; i <= pokemon_count; i++) {
+                await getPokemon(i)
+            }
+        }
+
+        //封装获取数据的函数
+        const getPokemon = async (id) => {
+            const url = `https://pokeapi.co/api/v2/pokemon/${id}`
+            const res = await fetch(url)
+            const data = await res.json()
+            createPokemonCard(data)
+        }
+
+        //生成卡片并填充数据
+        const createPokemonCard = (pokemon) => {
+            const pokemonEl = document.createElement('div')
+            pokemonEl.classList.add('pokemon')
+
+            const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1)
+            const id = pokemon.id.toString().padStart(3, '0')
+
+            const poke_types = pokemon.types.map(type => type.type.name)
+            const type = main_types.find(type => poke_types.indexOf(type) > -1)
+            const color = colors[type]
+
+            pokemonEl.style.backgroundColor = color
+
+            const pokemonInnerHTML = `
+            <div class="img-container">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png"" alt="${name}">
+            </div>
+            <div class="info">
+                <span class="number">#${id}</span>
+                <h3 class="name">${name}</h3>
+                <small class="type">Type: <span>${type}</span> </small>
+            </div>
+            `
+
+            pokemonEl.innerHTML = pokemonInnerHTML
+
+            poke_container.appendChild(pokemonEl)
+        }
+
+        fetchPokemons()
+    </script>
 </body>
 
 </html>

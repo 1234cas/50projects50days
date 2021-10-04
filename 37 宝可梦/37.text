@@ -1,0 +1,2 @@
+Object.keys(colors)
+padStart() padEnd() 自动补全
